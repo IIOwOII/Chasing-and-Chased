@@ -360,6 +360,54 @@
         ]
       },
       "path": "~/CacEtc"
+    },
+    {
+      "name": "PrdTestOption",
+      "type": "procedure",
+      "sortid": 24,
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "prd_test_option",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/PrdTestOptionProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/CacEtc"
+    },
+    {
+      "name": "PrdKeyRight",
+      "type": "procedure",
+      "sortid": 25,
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "prd_key_right",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/PrdKeyRightProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/CacEtc"
     }
   ],
   "variable_elements": [
@@ -403,7 +451,7 @@
       "name": "Option_tester",
       "type": "number",
       "scope": "map",
-      "value": "0"
+      "value": "0.0"
     },
     {
       "name": "Option_tester_str",

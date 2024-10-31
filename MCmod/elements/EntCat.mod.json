@@ -112,7 +112,7 @@
       "value": ""
     },
     "stepSound": {
-      "value": ""
+      "value": "block.stone.step"
     },
     "entityDataEntries": [],
     "onMobTickUpdate": {
