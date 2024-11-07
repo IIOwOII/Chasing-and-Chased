@@ -32,7 +32,7 @@
       "falpha": 0.0
     },
     "spawnEggDotColor": {
-      "value": -205,
+      "value": -65536,
       "falpha": 0.0
     },
     "creativeTab": {
@@ -112,7 +112,7 @@
       "value": ""
     },
     "stepSound": {
-      "value": "block.stone.step"
+      "value": "block.amethyst_block.step"
     },
     "entityDataEntries": [],
     "onMobTickUpdate": {

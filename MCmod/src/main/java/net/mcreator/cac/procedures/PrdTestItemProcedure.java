@@ -39,18 +39,23 @@ public class PrdTestItemProcedure {
 							_ent.getName().getString(), _ent.getDisplayName(), _ent.level.getServer(), _ent), "CaC_Test_Off");
 				}
 			}
-			CacModVariables.MapVariables.get(world).Pmt_difficulty = 0;
+			CacModVariables.MapVariables.get(world).Pmt_difficulty = 0.5;
 			CacModVariables.MapVariables.get(world).syncData(world);
 		} else if ((CacModVariables.MapVariables.get(world).Option_tester_str).equals("Increase Difficulty")) {
-			CacModVariables.MapVariables.get(world).Pmt_difficulty = CacModVariables.MapVariables.get(world).Pmt_difficulty + 0.2;
+			CacModVariables.MapVariables.get(world).Pmt_difficulty = CacModVariables.MapVariables.get(world).Pmt_difficulty + 0.05;
 			CacModVariables.MapVariables.get(world).syncData(world);
 			if (!world.isClientSide() && world.getServer() != null)
 				world.getServer().getPlayerList().broadcastSystemMessage(Component.literal(("Difficulty : " + new java.text.DecimalFormat("#.#").format(CacModVariables.MapVariables.get(world).Pmt_difficulty))), false);
 		} else if ((CacModVariables.MapVariables.get(world).Option_tester_str).equals("Decrease Difficulty")) {
-			CacModVariables.MapVariables.get(world).Pmt_difficulty = CacModVariables.MapVariables.get(world).Pmt_difficulty - 0.2;
-			CacModVariables.MapVariables.get(world).syncData(world);
-			if (!world.isClientSide() && world.getServer() != null)
-				world.getServer().getPlayerList().broadcastSystemMessage(Component.literal(("Difficulty : " + new java.text.DecimalFormat("#.#").format(CacModVariables.MapVariables.get(world).Pmt_difficulty))), false);
+			if (CacModVariables.MapVariables.get(world).Pmt_difficulty > 0.1) {
+				CacModVariables.MapVariables.get(world).Pmt_difficulty = CacModVariables.MapVariables.get(world).Pmt_difficulty - 0.05;
+				CacModVariables.MapVariables.get(world).syncData(world);
+				if (!world.isClientSide() && world.getServer() != null)
+					world.getServer().getPlayerList().broadcastSystemMessage(Component.literal(("Difficulty : " + new java.text.DecimalFormat("#.#").format(CacModVariables.MapVariables.get(world).Pmt_difficulty))), false);
+			} else {
+				if (!world.isClientSide() && world.getServer() != null)
+					world.getServer().getPlayerList().broadcastSystemMessage(Component.literal("But... Difficulty is already minimum!"), false);
+			}
 		}
 	}
 }

@@ -29,6 +29,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.FriendlyByteBuf;
 
+import net.mcreator.cac.init.CacModMobEffects;
 import net.mcreator.cac.init.CacModItems;
 import net.mcreator.cac.init.CacModEntities;
 
@@ -52,6 +53,8 @@ public class CacMod {
 
 		CacModItems.REGISTRY.register(bus);
 		CacModEntities.REGISTRY.register(bus);
+
+		CacModMobEffects.REGISTRY.register(bus);
 
 	}
 

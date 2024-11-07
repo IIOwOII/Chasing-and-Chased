@@ -1,0 +1,26 @@
+{
+  "_fv": 57,
+  "_type": "potioneffect",
+  "definition": {
+    "effectName": "Prey",
+    "icon": "icon_silverfish.png",
+    "color": {
+      "value": -1,
+      "falpha": 0.0
+    },
+    "isInstant": false,
+    "isBad": true,
+    "isBenefitical": false,
+    "renderStatusInInventory": true,
+    "renderStatusInHUD": false,
+    "onStarted": {
+      "name": "EffOnMorphPrey"
+    },
+    "onActiveTick": {
+      "name": "EffTickMorphPrey"
+    },
+    "onExpired": {
+      "name": "EffOffMorphPrey"
+    }
+  }
+}
