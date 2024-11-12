@@ -17,10 +17,10 @@ public class PrdTestChasedProcedure {
 		CacModVariables.MapVariables.get(world).Switch_Task = true;
 		CacModVariables.MapVariables.get(world).syncData(world);
 		if (!(entity instanceof LivingEntity _livEnt0 && _livEnt0.hasEffect(CacModMobEffects.EFF_MORPH_PREY.get()))) {
-			if (entity instanceof LivingEntity _entity && !_entity.level.isClientSide())
+			if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 				_entity.addEffect(new MobEffectInstance(CacModMobEffects.EFF_MORPH_PREY.get(), 65535, 0, false, false));
 		}
-		if (entity instanceof Player _player && !_player.level.isClientSide())
+		if (entity instanceof Player _player && !_player.level().isClientSide())
 			_player.displayClientMessage(Component.literal("Chased Task Test"), false);
 	}
 }

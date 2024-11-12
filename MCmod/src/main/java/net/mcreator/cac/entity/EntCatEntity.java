@@ -43,7 +43,7 @@ public class EntCatEntity extends PathfinderMob {
 
 	public EntCatEntity(EntityType<EntCatEntity> type, Level world) {
 		super(type, world);
-		maxUpStep = 1f;
+		setMaxUpStep(0.1f);
 		xpReward = 0;
 		setNoAi(false);
 		setPersistenceRequired();
@@ -91,7 +91,7 @@ public class EntCatEntity extends PathfinderMob {
 			return false;
 		if (damagesource.is(DamageTypes.LIGHTNING_BOLT))
 			return false;
-		if (damagesource.is(DamageTypes.EXPLOSION))
+		if (damagesource.is(DamageTypes.EXPLOSION) || damagesource.is(DamageTypes.PLAYER_EXPLOSION))
 			return false;
 		if (damagesource.is(DamageTypes.TRIDENT))
 			return false;
@@ -99,11 +99,19 @@ public class EntCatEntity extends PathfinderMob {
 			return false;
 		if (damagesource.is(DamageTypes.DRAGON_BREATH))
 			return false;
-		if (damagesource.is(DamageTypes.WITHER))
-			return false;
-		if (damagesource.is(DamageTypes.WITHER_SKULL))
+		if (damagesource.is(DamageTypes.WITHER) || damagesource.is(DamageTypes.WITHER_SKULL))
 			return false;
 		return super.hurt(damagesource, amount);
+	}
+
+	@Override
+	public boolean ignoreExplosion() {
+		return true;
+	}
+
+	@Override
+	public boolean fireImmune() {
+		return true;
 	}
 
 	@Override
@@ -116,13 +124,13 @@ public class EntCatEntity extends PathfinderMob {
 	@Override
 	public void baseTick() {
 		super.baseTick();
-		AiCatProcedure.execute(this.level, this.getX(), this.getY(), this.getZ(), this);
+		AiCatProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ(), this);
 	}
 
 	@Override
 	public void playerTouch(Player sourceentity) {
 		super.playerTouch(sourceentity);
-		PrdTouchProcedure.execute(this.level, this.getX(), this.getY(), this.getZ(), this);
+		PrdTouchProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ(), this);
 	}
 
 	public static void init() {

@@ -26,7 +26,7 @@ public class PrdTestOptionProcedure {
 			CacModVariables.MapVariables.get(world).Option_tester_str = "Reset";
 			CacModVariables.MapVariables.get(world).syncData(world);
 		}
-		if (entity instanceof Player _player && !_player.level.isClientSide())
+		if (entity instanceof Player _player && !_player.level().isClientSide())
 			_player.displayClientMessage(Component.literal(CacModVariables.MapVariables.get(world).Option_tester_str), true);
 	}
 }

@@ -12,8 +12,8 @@ public class AiCatProcedure {
 			return;
 		if (CacModVariables.MapVariables.get(world).Switch_Task) {
 			if (!entity.getPersistentData().getBoolean("C_Touch")) {
-				if (x - 16 <= CacModVariables.MapVariables.get(world).Pos_player_x && x + 16 >= CacModVariables.MapVariables.get(world).Pos_player_x && z - 16 <= CacModVariables.MapVariables.get(world).Pos_player_z
-						&& z + 16 >= CacModVariables.MapVariables.get(world).Pos_player_z) {
+				if (x - 32 <= CacModVariables.MapVariables.get(world).Pos_player_x && x + 32 >= CacModVariables.MapVariables.get(world).Pos_player_x && z - 32 <= CacModVariables.MapVariables.get(world).Pos_player_z
+						&& z + 32 >= CacModVariables.MapVariables.get(world).Pos_player_z) {
 					if (entity instanceof Mob _entity)
 						_entity.getNavigation().moveTo(CacModVariables.MapVariables.get(world).Pos_player_x, y, CacModVariables.MapVariables.get(world).Pos_player_z, CacModVariables.MapVariables.get(world).Pmt_difficulty);
 				}

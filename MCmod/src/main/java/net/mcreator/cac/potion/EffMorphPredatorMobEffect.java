@@ -3,9 +3,15 @@ package net.mcreator.cac.potion;
 
 import net.minecraftforge.client.extensions.common.IClientMobEffectExtensions;
 
+import net.minecraft.world.entity.ai.attributes.AttributeMap;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffect;
+
+import net.mcreator.cac.procedures.EffTickMorphProcedure;
+import net.mcreator.cac.procedures.EffOnMorphPredatorProcedure;
+import net.mcreator.cac.procedures.EffOffMorphProcedure;
 
 public class EffMorphPredatorMobEffect extends MobEffect {
 	public EffMorphPredatorMobEffect() {
@@ -13,8 +19,19 @@ public class EffMorphPredatorMobEffect extends MobEffect {
 	}
 
 	@Override
-	public String getDescriptionId() {
-		return "effect.cac.eff_morph_predator";
+	public void addAttributeModifiers(LivingEntity entity, AttributeMap attributeMap, int amplifier) {
+		EffOnMorphPredatorProcedure.execute(entity.level(), entity.getX(), entity.getY(), entity.getZ(), entity);
+	}
+
+	@Override
+	public void applyEffectTick(LivingEntity entity, int amplifier) {
+		EffTickMorphProcedure.execute(entity);
+	}
+
+	@Override
+	public void removeAttributeModifiers(LivingEntity entity, AttributeMap attributeMap, int amplifier) {
+		super.removeAttributeModifiers(entity, attributeMap, amplifier);
+		EffOffMorphProcedure.execute(entity);
 	}
 
 	@Override

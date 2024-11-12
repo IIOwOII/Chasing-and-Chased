@@ -1,17 +1,25 @@
 {
-  "_fv": 57,
+  "_fv": 66,
   "_type": "potioneffect",
   "definition": {
     "effectName": "Predator",
-    "icon": "icon_cat.png",
+    "icon": "icon_cat",
     "color": {
       "value": -1,
       "falpha": 0.0
     },
     "isInstant": false,
-    "isBad": false,
-    "isBenefitical": true,
+    "mobEffectCategory": "BENEFICIAL",
     "renderStatusInInventory": true,
-    "renderStatusInHUD": false
+    "renderStatusInHUD": false,
+    "onStarted": {
+      "name": "EffOnMorphPredator"
+    },
+    "onActiveTick": {
+      "name": "EffTickMorph"
+    },
+    "onExpired": {
+      "name": "EffOffMorph"
+    }
   }
 }

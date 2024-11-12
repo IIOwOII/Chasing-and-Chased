@@ -1,4 +1,4 @@
-version:3337
+version:3465
 autoJump:false
 operatorItemsTab:false
 autoSuggestions:true
@@ -6,7 +6,7 @@ chatColors:true
 chatLinks:true
 chatLinksPrompt:true
 enableVsync:false
-entityShadows:false
+entityShadows:true
 forceUnicodeFont:false
 discrete_mouse_scroll:false
 invertYMouse:false
@@ -22,7 +22,7 @@ toggleSprint:false
 darkMojangStudiosBackground:false
 hideLightningFlashes:false
 mouseSensitivity:0.5
-fov:0.5
+fov:0.0
 screenEffectScale:1.0
 fovEffectScale:1.0
 darknessEffectScale:1.0
@@ -35,13 +35,13 @@ renderDistance:5
 simulationDistance:12
 entityDistanceScaling:1.0
 guiScale:0
-particles:1
-maxFps:120
+particles:0
+maxFps:260
 graphicsMode:0
-ao:true
+ao:false
 prioritizeChunkUpdates:0
 biomeBlendRadius:2
-renderClouds:"false"
+renderClouds:"fast"
 resourcePacks:[]
 incompatibleResourcePacks:[]
 lastServer:localhost:25463
@@ -122,7 +122,7 @@ key_key.cac.cac_key_left:key.keyboard.left
 key_key.cac.cac_key_right:key.keyboard.right
 soundCategory_master:1.0
 soundCategory_music:0.0
-soundCategory_record:0.0
+soundCategory_record:1.0
 soundCategory_weather:1.0
 soundCategory_block:1.0
 soundCategory_hostile:1.0

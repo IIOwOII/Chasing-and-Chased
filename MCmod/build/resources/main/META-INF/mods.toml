@@ -1,22 +1,27 @@
 modLoader="javafml"
-loaderVersion="[45,)"
+loaderVersion="[47,)"
 license="Academic Free License v3.0"
 
 [[mods]]
 modId="cac"
-version="1.0.0"
+version="1.1.0"
 displayName="CaC"
 displayURL="https://mcreator.net"
 credits="Created using mod maker MCreator - https://mcreator.net/about"
 authors="owo, MCreator"
 
+# Start of user code block mod configuration
+# End of user code block mod configuration
+
 [[dependencies.cac]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.19.4]"
-    ordering="NONE"
+    versionRange="[1.20.1]"
+    ordering="AFTER"
     side="BOTH"
 
 
 
 
+# Start of user code block dependencies configuration
+# End of user code block dependencies configuration
