@@ -662,14 +662,122 @@
         ]
       },
       "path": "~/CacEffect"
+    },
+    {
+      "name": "PrdSubjectRegister",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "prd_subject_register",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/PrdSubjectRegisterProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "arguments",
+            "type": "cmdcontext"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/CacCommand"
+    },
+    {
+      "name": "CmdSubjectRegister",
+      "type": "command",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "cmd_subject_register",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/command/CmdSubjectRegisterCommand.java"
+        ]
+      },
+      "path": "~/CacCommand"
+    },
+    {
+      "name": "CmdSubjectCheck",
+      "type": "command",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "cmd_subject_check",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/command/CmdSubjectCheckCommand.java"
+        ]
+      },
+      "path": "~/CacCommand"
+    },
+    {
+      "name": "PrdSubjectCheck",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "prd_subject_check",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/PrdSubjectCheckProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/CacCommand"
     }
   ],
   "variable_elements": [
     {
-      "name": "Switch_Task",
-      "type": "logic",
+      "name": "Cnd_far",
+      "type": "number",
       "scope": "map",
-      "value": "false"
+      "value": "64.0"
+    },
+    {
+      "name": "Cnd_near",
+      "type": "number",
+      "scope": "map",
+      "value": "8.0"
+    },
+    {
+      "name": "Exp_Directory",
+      "type": "string",
+      "scope": "map",
+      "value": "\"\""
+    },
+    {
+      "name": "Exp_Subject",
+      "type": "string",
+      "scope": "map",
+      "value": "\"sub01\""
+    },
+    {
+      "name": "Option_tester",
+      "type": "number",
+      "scope": "map",
+      "value": "0.0"
+    },
+    {
+      "name": "Option_tester_str",
+      "type": "string",
+      "scope": "map",
+      "value": "\"Reset\""
+    },
+    {
+      "name": "Pmt_difficulty",
+      "type": "number",
+      "scope": "map",
+      "value": "0.0"
     },
     {
       "name": "Pos_player_x",
@@ -684,34 +792,10 @@
       "value": "0"
     },
     {
-      "name": "Cnd_near",
-      "type": "number",
+      "name": "Switch_Task",
+      "type": "logic",
       "scope": "map",
-      "value": "8.0"
-    },
-    {
-      "name": "Cnd_far",
-      "type": "number",
-      "scope": "map",
-      "value": "64.0"
-    },
-    {
-      "name": "Pmt_difficulty",
-      "type": "number",
-      "scope": "map",
-      "value": "0.0"
-    },
-    {
-      "name": "Option_tester",
-      "type": "number",
-      "scope": "map",
-      "value": "0.0"
-    },
-    {
-      "name": "Option_tester_str",
-      "type": "string",
-      "scope": "map",
-      "value": "\"Reset\""
+      "value": "false"
     }
   ],
   "sound_elements": [],

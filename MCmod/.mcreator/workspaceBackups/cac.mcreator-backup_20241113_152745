@@ -51,30 +51,6 @@
       "path": "~/CacCondition"
     },
     {
-      "name": "AiCatRun",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "ai_cat_run",
-      "metadata": {
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/cac/procedures/AiCatRunProcedure.java"
-        ],
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ]
-      },
-      "path": "~/CacAI"
-    },
-    {
       "name": "PrdInitializeCat",
       "type": "procedure",
       "compiles": true,
@@ -418,44 +394,6 @@
       "path": "~/CacEffect"
     },
     {
-      "name": "EffOffMorphPrey",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "eff_off_morph_prey",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/cac/procedures/EffOffMorphPreyProcedure.java"
-        ],
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ]
-      },
-      "path": "~/CacEffect"
-    },
-    {
-      "name": "EffTickMorphPrey",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "eff_tick_morph_prey",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/cac/procedures/EffTickMorphPreyProcedure.java"
-        ],
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ]
-      },
-      "path": "~/CacEffect"
-    },
-    {
       "name": "EntPlayerMouse",
       "type": "livingentity",
       "compiles": true,
@@ -534,14 +472,261 @@
         ]
       },
       "path": "~/CacEntity"
+    },
+    {
+      "name": "PrdTaskPre",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "prd_task_pre",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/PrdTaskPreProcedure.java"
+        ],
+        "dependencies": []
+      },
+      "path": "~/CacCommand"
+    },
+    {
+      "name": "CmdTaskPre",
+      "type": "command",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "cmd_task_pre",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/command/CmdTaskPreCommand.java"
+        ]
+      },
+      "path": "~/CacCommand"
+    },
+    {
+      "name": "PrdInitializeMouse",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "prd_initialize_mouse",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/PrdInitializeMouseProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      },
+      "path": "~/CacCondition"
+    },
+    {
+      "name": "AiMouse",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "ai_mouse",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/AiMouseProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/CacAI"
+    },
+    {
+      "name": "CmdTestChasing",
+      "type": "command",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "cmd_test_chasing",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/command/CmdTestChasingCommand.java"
+        ]
+      },
+      "path": "~/CacCommand"
+    },
+    {
+      "name": "PrdTestChasing",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "prd_test_chasing",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/PrdTestChasingProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/CacCommand"
+    },
+    {
+      "name": "EffTickMorph",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "eff_tick_morph",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/EffTickMorphProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      },
+      "path": "~/CacEffect"
+    },
+    {
+      "name": "EffOffMorph",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "eff_off_morph",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/EffOffMorphProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      },
+      "path": "~/CacEffect"
+    },
+    {
+      "name": "EffOnMorphPredator",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "eff_on_morph_predator",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/EffOnMorphPredatorProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/CacEffect"
+    },
+    {
+      "name": "PrdSubjectRegister",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "prd_subject_register",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/PrdSubjectRegisterProcedure.java"
+        ],
+        "dependencies": []
+      },
+      "path": "~/CacCommand"
+    },
+    {
+      "name": "CmdSubjectRegister",
+      "type": "command",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "cmd_subject_register",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/command/CmdSubjectRegisterCommand.java"
+        ]
+      },
+      "path": "~/CacCommand"
     }
   ],
   "variable_elements": [
     {
-      "name": "Switch_Task",
-      "type": "logic",
+      "name": "Cnd_far",
+      "type": "number",
       "scope": "map",
-      "value": "false"
+      "value": "64.0"
+    },
+    {
+      "name": "Cnd_near",
+      "type": "number",
+      "scope": "map",
+      "value": "8.0"
+    },
+    {
+      "name": "Exp_Subject",
+      "type": "string",
+      "scope": "map",
+      "value": "\"sub01\""
+    },
+    {
+      "name": "Option_tester",
+      "type": "number",
+      "scope": "map",
+      "value": "0.0"
+    },
+    {
+      "name": "Option_tester_str",
+      "type": "string",
+      "scope": "map",
+      "value": "\"Reset\""
+    },
+    {
+      "name": "Pmt_difficulty",
+      "type": "number",
+      "scope": "map",
+      "value": "0.0"
     },
     {
       "name": "Pos_player_x",
@@ -556,34 +741,10 @@
       "value": "0"
     },
     {
-      "name": "Cnd_near",
-      "type": "number",
+      "name": "Switch_Task",
+      "type": "logic",
       "scope": "map",
-      "value": "8.0"
-    },
-    {
-      "name": "Cnd_far",
-      "type": "number",
-      "scope": "map",
-      "value": "64.0"
-    },
-    {
-      "name": "Pmt_difficulty",
-      "type": "number",
-      "scope": "map",
-      "value": "0.0"
-    },
-    {
-      "name": "Option_tester",
-      "type": "number",
-      "scope": "map",
-      "value": "0.0"
-    },
-    {
-      "name": "Option_tester_str",
-      "type": "string",
-      "scope": "map",
-      "value": "\"Reset\""
+      "value": "false"
     }
   ],
   "sound_elements": [],

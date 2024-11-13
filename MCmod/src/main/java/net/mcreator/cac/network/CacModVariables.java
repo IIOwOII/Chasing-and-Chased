@@ -87,14 +87,16 @@ public class CacModVariables {
 
 	public static class MapVariables extends SavedData {
 		public static final String DATA_NAME = "cac_mapvars";
-		public boolean Switch_Task = false;
-		public double Pos_player_x = 0;
-		public double Pos_player_z = 0;
-		public double Cnd_near = 8.0;
 		public double Cnd_far = 64.0;
-		public double Pmt_difficulty = 0.0;
+		public double Cnd_near = 8.0;
+		public String Exp_Directory = "\"\"";
+		public String Exp_Subject = "\"sub01\"";
 		public double Option_tester = 0.0;
 		public String Option_tester_str = "\"Reset\"";
+		public double Pmt_difficulty = 0.0;
+		public double Pos_player_x = 0;
+		public double Pos_player_z = 0;
+		public boolean Switch_Task = false;
 
 		public static MapVariables load(CompoundTag tag) {
 			MapVariables data = new MapVariables();
@@ -103,26 +105,30 @@ public class CacModVariables {
 		}
 
 		public void read(CompoundTag nbt) {
-			Switch_Task = nbt.getBoolean("Switch_Task");
-			Pos_player_x = nbt.getDouble("Pos_player_x");
-			Pos_player_z = nbt.getDouble("Pos_player_z");
-			Cnd_near = nbt.getDouble("Cnd_near");
 			Cnd_far = nbt.getDouble("Cnd_far");
-			Pmt_difficulty = nbt.getDouble("Pmt_difficulty");
+			Cnd_near = nbt.getDouble("Cnd_near");
+			Exp_Directory = nbt.getString("Exp_Directory");
+			Exp_Subject = nbt.getString("Exp_Subject");
 			Option_tester = nbt.getDouble("Option_tester");
 			Option_tester_str = nbt.getString("Option_tester_str");
+			Pmt_difficulty = nbt.getDouble("Pmt_difficulty");
+			Pos_player_x = nbt.getDouble("Pos_player_x");
+			Pos_player_z = nbt.getDouble("Pos_player_z");
+			Switch_Task = nbt.getBoolean("Switch_Task");
 		}
 
 		@Override
 		public CompoundTag save(CompoundTag nbt) {
-			nbt.putBoolean("Switch_Task", Switch_Task);
-			nbt.putDouble("Pos_player_x", Pos_player_x);
-			nbt.putDouble("Pos_player_z", Pos_player_z);
-			nbt.putDouble("Cnd_near", Cnd_near);
 			nbt.putDouble("Cnd_far", Cnd_far);
-			nbt.putDouble("Pmt_difficulty", Pmt_difficulty);
+			nbt.putDouble("Cnd_near", Cnd_near);
+			nbt.putString("Exp_Directory", Exp_Directory);
+			nbt.putString("Exp_Subject", Exp_Subject);
 			nbt.putDouble("Option_tester", Option_tester);
 			nbt.putString("Option_tester_str", Option_tester_str);
+			nbt.putDouble("Pmt_difficulty", Pmt_difficulty);
+			nbt.putDouble("Pos_player_x", Pos_player_x);
+			nbt.putDouble("Pos_player_z", Pos_player_z);
+			nbt.putBoolean("Switch_Task", Switch_Task);
 			return nbt;
 		}
 

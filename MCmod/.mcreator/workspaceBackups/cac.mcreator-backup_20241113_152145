@@ -51,30 +51,6 @@
       "path": "~/CacCondition"
     },
     {
-      "name": "AiCatRun",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "ai_cat_run",
-      "metadata": {
-        "return_type": "logic",
-        "files": [
-          "src/main/java/net/mcreator/cac/procedures/AiCatRunProcedure.java"
-        ],
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ]
-      },
-      "path": "~/CacAI"
-    },
-    {
       "name": "PrdInitializeCat",
       "type": "procedure",
       "compiles": true,
@@ -418,44 +394,6 @@
       "path": "~/CacEffect"
     },
     {
-      "name": "EffOffMorphPrey",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "eff_off_morph_prey",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/cac/procedures/EffOffMorphPreyProcedure.java"
-        ],
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ]
-      },
-      "path": "~/CacEffect"
-    },
-    {
-      "name": "EffTickMorphPrey",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "eff_tick_morph_prey",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/cac/procedures/EffTickMorphPreyProcedure.java"
-        ],
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ]
-      },
-      "path": "~/CacEffect"
-    },
-    {
       "name": "EntPlayerMouse",
       "type": "livingentity",
       "compiles": true,
@@ -561,6 +499,169 @@
         ]
       },
       "path": "~/CacCommand"
+    },
+    {
+      "name": "PrdInitializeMouse",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "prd_initialize_mouse",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/PrdInitializeMouseProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      },
+      "path": "~/CacCondition"
+    },
+    {
+      "name": "AiMouse",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "ai_mouse",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/AiMouseProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/CacAI"
+    },
+    {
+      "name": "CmdTestChasing",
+      "type": "command",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "cmd_test_chasing",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/command/CmdTestChasingCommand.java"
+        ]
+      },
+      "path": "~/CacCommand"
+    },
+    {
+      "name": "PrdTestChasing",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "prd_test_chasing",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/PrdTestChasingProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/CacCommand"
+    },
+    {
+      "name": "EffTickMorph",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "eff_tick_morph",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/EffTickMorphProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      },
+      "path": "~/CacEffect"
+    },
+    {
+      "name": "EffOffMorph",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "eff_off_morph",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/EffOffMorphProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      },
+      "path": "~/CacEffect"
+    },
+    {
+      "name": "EffOnMorphPredator",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "eff_on_morph_predator",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/EffOnMorphPredatorProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/CacEffect"
     }
   ],
   "variable_elements": [
