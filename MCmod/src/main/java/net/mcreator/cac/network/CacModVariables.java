@@ -87,8 +87,6 @@ public class CacModVariables {
 
 	public static class MapVariables extends SavedData {
 		public static final String DATA_NAME = "cac_mapvars";
-		public double Cnd_far = 64.0;
-		public double Cnd_near = 8.0;
 		public String Exp_Directory = "\"\"";
 		public String Exp_Subject = "\"sub01\"";
 		public double Option_tester = 0.0;
@@ -97,6 +95,8 @@ public class CacModVariables {
 		public double Pos_player_x = 0;
 		public double Pos_player_z = 0;
 		public boolean Switch_Task = false;
+		public double Pmt_far = 16.0;
+		public double Pmt_distance_scale = 1.0;
 
 		public static MapVariables load(CompoundTag tag) {
 			MapVariables data = new MapVariables();
@@ -105,8 +105,6 @@ public class CacModVariables {
 		}
 
 		public void read(CompoundTag nbt) {
-			Cnd_far = nbt.getDouble("Cnd_far");
-			Cnd_near = nbt.getDouble("Cnd_near");
 			Exp_Directory = nbt.getString("Exp_Directory");
 			Exp_Subject = nbt.getString("Exp_Subject");
 			Option_tester = nbt.getDouble("Option_tester");
@@ -115,12 +113,12 @@ public class CacModVariables {
 			Pos_player_x = nbt.getDouble("Pos_player_x");
 			Pos_player_z = nbt.getDouble("Pos_player_z");
 			Switch_Task = nbt.getBoolean("Switch_Task");
+			Pmt_far = nbt.getDouble("Pmt_far");
+			Pmt_distance_scale = nbt.getDouble("Pmt_distance_scale");
 		}
 
 		@Override
 		public CompoundTag save(CompoundTag nbt) {
-			nbt.putDouble("Cnd_far", Cnd_far);
-			nbt.putDouble("Cnd_near", Cnd_near);
 			nbt.putString("Exp_Directory", Exp_Directory);
 			nbt.putString("Exp_Subject", Exp_Subject);
 			nbt.putDouble("Option_tester", Option_tester);
@@ -129,6 +127,8 @@ public class CacModVariables {
 			nbt.putDouble("Pos_player_x", Pos_player_x);
 			nbt.putDouble("Pos_player_z", Pos_player_z);
 			nbt.putBoolean("Switch_Task", Switch_Task);
+			nbt.putDouble("Pmt_far", Pmt_far);
+			nbt.putDouble("Pmt_distance_scale", Pmt_distance_scale);
 			return nbt;
 		}
 

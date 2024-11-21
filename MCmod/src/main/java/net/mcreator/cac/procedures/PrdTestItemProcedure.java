@@ -41,6 +41,8 @@ public class PrdTestItemProcedure {
 			}
 			CacModVariables.MapVariables.get(world).Pmt_difficulty = 0.6;
 			CacModVariables.MapVariables.get(world).syncData(world);
+			CacModVariables.MapVariables.get(world).Pmt_distance_scale = 1;
+			CacModVariables.MapVariables.get(world).syncData(world);
 		} else if ((CacModVariables.MapVariables.get(world).Option_tester_str).equals("Increase Difficulty")) {
 			CacModVariables.MapVariables.get(world).Pmt_difficulty = CacModVariables.MapVariables.get(world).Pmt_difficulty + 0.02;
 			CacModVariables.MapVariables.get(world).syncData(world);
@@ -55,6 +57,21 @@ public class PrdTestItemProcedure {
 			} else {
 				if (!world.isClientSide() && world.getServer() != null)
 					world.getServer().getPlayerList().broadcastSystemMessage(Component.literal("But... Difficulty is already minimum!"), false);
+			}
+		} else if ((CacModVariables.MapVariables.get(world).Option_tester_str).equals("Increase Distance Scale")) {
+			CacModVariables.MapVariables.get(world).Pmt_distance_scale = CacModVariables.MapVariables.get(world).Pmt_distance_scale + 0.1;
+			CacModVariables.MapVariables.get(world).syncData(world);
+			if (!world.isClientSide() && world.getServer() != null)
+				world.getServer().getPlayerList().broadcastSystemMessage(Component.literal(("Distance Scale : " + new java.text.DecimalFormat("#.##").format(CacModVariables.MapVariables.get(world).Pmt_distance_scale))), false);
+		} else if ((CacModVariables.MapVariables.get(world).Option_tester_str).equals("Decrease Distance Scale")) {
+			if (CacModVariables.MapVariables.get(world).Pmt_distance_scale > 0.1) {
+				CacModVariables.MapVariables.get(world).Pmt_distance_scale = CacModVariables.MapVariables.get(world).Pmt_distance_scale - 0.1;
+				CacModVariables.MapVariables.get(world).syncData(world);
+				if (!world.isClientSide() && world.getServer() != null)
+					world.getServer().getPlayerList().broadcastSystemMessage(Component.literal(("Distance Scale : " + new java.text.DecimalFormat("#.##").format(CacModVariables.MapVariables.get(world).Pmt_distance_scale))), false);
+			} else {
+				if (!world.isClientSide() && world.getServer() != null)
+					world.getServer().getPlayerList().broadcastSystemMessage(Component.literal("But... Distance Scale is already minimum!"), false);
 			}
 		}
 	}

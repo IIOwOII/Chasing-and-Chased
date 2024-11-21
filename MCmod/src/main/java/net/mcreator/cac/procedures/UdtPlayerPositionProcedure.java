@@ -25,6 +25,8 @@ public class UdtPlayerPositionProcedure {
 	}
 
 	private static void execute(@Nullable Event event, LevelAccessor world, double x, double z) {
+		double sx = 0;
+		double sz = 0;
 		CacModVariables.MapVariables.get(world).Pos_player_x = x;
 		CacModVariables.MapVariables.get(world).syncData(world);
 		CacModVariables.MapVariables.get(world).Pos_player_z = z;

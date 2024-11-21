@@ -9,7 +9,9 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.BlockItem;
 
 import net.mcreator.cac.item.CacTestItemItem;
 import net.mcreator.cac.CacMod;
@@ -21,6 +23,12 @@ public class CacModItems {
 	public static final RegistryObject<Item> ENT_PLAYER_MOUSE_SPAWN_EGG = REGISTRY.register("ent_player_mouse_spawn_egg", () -> new ForgeSpawnEggItem(CacModEntities.ENT_PLAYER_MOUSE, -1, -16711936, new Item.Properties()));
 	public static final RegistryObject<Item> ENT_MOUSE_SPAWN_EGG = REGISTRY.register("ent_mouse_spawn_egg", () -> new ForgeSpawnEggItem(CacModEntities.ENT_MOUSE, -16777216, -16711936, new Item.Properties()));
 	public static final RegistryObject<Item> ENT_PLAYER_CAT_SPAWN_EGG = REGISTRY.register("ent_player_cat_spawn_egg", () -> new ForgeSpawnEggItem(CacModEntities.ENT_PLAYER_CAT, -1, -65536, new Item.Properties()));
+	public static final RegistryObject<Item> BLK_OBSTACLE = block(CacModBlocks.BLK_OBSTACLE);
+	public static final RegistryObject<Item> BLK_WALL = block(CacModBlocks.BLK_WALL);
+
 	// Start of user code block custom items
 	// End of user code block custom items
+	private static RegistryObject<Item> block(RegistryObject<Block> block) {
+		return REGISTRY.register(block.getId().getPath(), () -> new BlockItem(block.get(), new Item.Properties()));
+	}
 }

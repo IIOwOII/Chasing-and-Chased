@@ -21,7 +21,10 @@ public class CacModTabs {
 
 	@SubscribeEvent
 	public static void buildTabContentsVanilla(BuildCreativeModeTabContentsEvent tabData) {
-		if (tabData.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
+		if (tabData.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
+			tabData.accept(CacModBlocks.BLK_OBSTACLE.get().asItem());
+			tabData.accept(CacModBlocks.BLK_WALL.get().asItem());
+		} else if (tabData.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
 			tabData.accept(CacModItems.CAC_TEST_ITEM.get());
 		} else if (tabData.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
 			tabData.accept(CacModItems.ENT_CAT_SPAWN_EGG.get());

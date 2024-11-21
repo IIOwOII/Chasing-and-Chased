@@ -11,7 +11,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.entity.projectile.ThrownPotion;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.SpawnGroupData;
@@ -32,6 +31,7 @@ import net.minecraft.core.BlockPos;
 
 import net.mcreator.cac.procedures.PrdTouchProcedure;
 import net.mcreator.cac.procedures.PrdInitializeMouseProcedure;
+import net.mcreator.cac.procedures.AiMouseProcedure;
 import net.mcreator.cac.init.CacModEntities;
 
 import javax.annotation.Nullable;
@@ -57,7 +57,7 @@ public class EntMouseEntity extends PathfinderMob {
 	@Override
 	protected void registerGoals() {
 		super.registerGoals();
-		this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntPlayerCatEntity.class, (float) 16, 1, 1.2));
+
 	}
 
 	@Override
@@ -124,6 +124,12 @@ public class EntMouseEntity extends PathfinderMob {
 		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata, tag);
 		PrdInitializeMouseProcedure.execute(this);
 		return retval;
+	}
+
+	@Override
+	public void baseTick() {
+		super.baseTick();
+		AiMouseProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ(), this);
 	}
 
 	@Override

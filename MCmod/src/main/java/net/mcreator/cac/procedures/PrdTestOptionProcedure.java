@@ -20,6 +20,12 @@ public class PrdTestOptionProcedure {
 		} else if (CacModVariables.MapVariables.get(world).Option_tester == 2) {
 			CacModVariables.MapVariables.get(world).Option_tester_str = "Decrease Difficulty";
 			CacModVariables.MapVariables.get(world).syncData(world);
+		} else if (CacModVariables.MapVariables.get(world).Option_tester == 3) {
+			CacModVariables.MapVariables.get(world).Option_tester_str = "Increase Distance Scale";
+			CacModVariables.MapVariables.get(world).syncData(world);
+		} else if (CacModVariables.MapVariables.get(world).Option_tester == 4) {
+			CacModVariables.MapVariables.get(world).Option_tester_str = "Decrease Distance Scale";
+			CacModVariables.MapVariables.get(world).syncData(world);
 		} else {
 			CacModVariables.MapVariables.get(world).Option_tester = 0;
 			CacModVariables.MapVariables.get(world).syncData(world);

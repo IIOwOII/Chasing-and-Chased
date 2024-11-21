@@ -9,7 +9,9 @@
   "effect.cac.eff_morph_predator": "Predator",
   "entity.cac.ent_player_cat": "Predator(Player)",
   "effect.cac.eff_morph_prey": "Prey",
+  "block.cac.blk_wall": "Wall",
   "item.cac.ent_player_mouse_spawn_egg": "Prey(Player) Spawn Egg",
   "entity.cac.ent_mouse": "Prey",
+  "block.cac.blk_obstacle": "Obstacle",
   "key.cac.cac_key_right": "Cac Key Right"
 }

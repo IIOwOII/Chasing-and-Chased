@@ -21,16 +21,32 @@ def load_image(file):
 
 #%%
 class Env_CaC():
-    def __init__(self, grid_num=(10,10)):
+    def __init__(self, grid_num=(10,10), speed_prey=8, speed_predator=8):
+        self.mode = 0
+        
+        # 그리드 설정
         self.grid_num = grid_num
+        self.grid_size = 32
+        self.grid_SP = (64,64) # 그리드가 시작되는 위치, 즉 그리드 왼쪽 상단의 위치
+        self.grid_EP = (self.grid_SP[0]+self.grid_num[0]*self.grid_size, 
+                        self.grid_SP[1]+self.grid_num[1]*self.grid_size)
         
         self.mouse_x = 0
         self.mouse_y = 0
         self.MX = 0
         self.MY = 0
         
+        self.speed_prey = speed_prey
+        self.speed_predator = speed_predator
+        
+        self.freq = 10
+        self.map_prey = np.zeros((grid_num[0]*self.freq, grid_num[1]*self.freq))
+        self.map_predator = np.zeros((grid_num[0]*self.freq, grid_num[1]*self.freq))
+        
         self.obstacle = []
+        self.vec_obstacles = [] # center 위치 픽셀 좌표
         self.wall = []
+        self.vec_walls = []
         self.wall.append((-1,-1))
         self.wall.append((-1,grid_num[1]))
         self.wall.append((grid_num[0],-1))
@@ -40,24 +56,63 @@ class Env_CaC():
         for wall in itertools.product(np.array([-1,grid_num[0]]),np.arange(0,grid_num[1])):
             self.wall.append(wall)
         
+        for wall in self.wall:
+            self.vec_walls.append(Vec2(self.grid_SP[0]+(wall[0]*self.grid_size)+self.grid_size//2, 
+                                       self.grid_SP[1]+(wall[1]*self.grid_size)+self.grid_size//2))
+        
         self.render_initialize()
     
     
     def step(self, action):
-        self.MX = (self.mouse_x-self.grid_SP[0])//self.grid_size
-        self.MY = (self.mouse_y-self.grid_SP[1])//self.grid_size
-        
-        
+        # Mode Change
         if (action==0):
-            self.obstacle = []
-        if (action==1):
-            pos = (self.MX, self.MY)
-            if pos in self.obstacle: # 이미 설치되었다면 지움
-                self.obstacle.remove(pos)
-            else: # 없다면 설치
-                if ((pos[0]<self.MX_max) and (pos[1]<self.MY_max)) and ((pos[0]>=0) and (pos[1]>=0)):
-                    self.obstacle.append(pos)
+            self.mode = (self.mode+1)%4
+            if (self.mode == 0):
+                self.prey.__del__()
+                self.predator.__del__()
+            else:
+                available = False
+                while not available:
+                    available = True
+                    prey_pos = (np.random.randint(0,self.grid_num[0]), np.random.randint(0,self.grid_num[1]))
+                    predator_pos = (np.random.randint(0,self.grid_num[0]), np.random.randint(0,self.grid_num[1]))
+                    if (prey_pos == predator_pos):
+                        available = False
+                    for pos in self.obstacle:
+                        if (pos == prey_pos) or (pos == predator_pos):
+                            available = False
+                
+                self.prey = self.Prey(self, (self.mode%2==1), np.array(prey_pos)*self.grid_size+self.grid_SP)
+                self.predator = self.Predator(self, (self.mode>=2), np.array(predator_pos)*self.grid_size+self.grid_SP)
         
+        if (self.mode==0): # edit
+            self.MX = (self.mouse_x-self.grid_SP[0])//self.grid_size
+            self.MY = (self.mouse_y-self.grid_SP[1])//self.grid_size
+            if (action==1): # 설치
+                pos = (self.MX, self.MY)
+                if pos in self.obstacle: # 이미 설치되었다면 지움
+                    idx = self.obstacle.index(pos)
+                    del self.obstacle[idx]
+                    del self.vec_obstacles[idx]
+                else: # 없다면 설치
+                    if ((pos[0]<self.MX_max) and (pos[1]<self.MY_max)) and ((pos[0]>=0) and (pos[1]>=0)):
+                        self.obstacle.append(pos)
+                        self.vec_obstacles.append(Vec2(self.grid_SP[0]+(pos[0]*self.grid_size)+self.grid_size//2, 
+                                                       self.grid_SP[1]+(pos[1]*self.grid_size)+self.grid_size//2))
+            elif (action==2): # 리셋
+                self.obstacle = []
+                self.vec_obstacles = []
+        elif (self.mode==1): # chasing
+            if (action==1):
+                self.predator.pos[0] += self.speed_predator
+            elif (action==2):
+                self.predator.pos[1] -= self.speed_predator
+            elif (action==3):
+                self.predator.pos[0] -= self.speed_predator
+            elif (action==4):
+                self.predator.pos[1] += self.speed_predator
+            self.prey.move()
+            
     
     def render_initialize(self):
         pg.init()
@@ -68,12 +123,6 @@ class Env_CaC():
         
         # clock 생성
         self.G_clock = pg.time.Clock()
-        
-        # 그리드 설정
-        self.grid_size = 32
-        self.grid_SP = (64,64) # 그리드가 시작되는 위치, 즉 그리드 왼쪽 상단의 위치
-        self.grid_EP = (self.grid_SP[0]+self.grid_num[0]*self.grid_size, 
-                        self.grid_SP[1]+self.grid_num[1]*self.grid_size)
         
         self.MX_max = self.grid_num[0] # 미만
         self.MY_max = self.grid_num[1] # 미만
@@ -92,8 +141,14 @@ class Env_CaC():
     def render(self):
         self.screen.fill((0,0,0)) # 화면 검은색으로
         
-        self.MX = (self.mouse_x-self.grid_SP[0])//self.grid_size
-        self.MY = (self.mouse_y-self.grid_SP[1])//self.grid_size
+        # Select Block
+        if (self.mode==0): # edit
+            self.MX = (self.mouse_x-self.grid_SP[0])//self.grid_size
+            self.MY = (self.mouse_y-self.grid_SP[1])//self.grid_size
+            if ((self.MX<self.MX_max) and (self.MY<self.MY_max)) and ((self.MX>=0) and (self.MY>=0)):
+                self.screen.blit(self.spr_select,(self.grid_SP[0]+self.grid_size*self.MX,
+                                                  self.grid_SP[1]+self.grid_size*self.MY,
+                                                  self.grid_size, self.grid_size))
         
         ## Wall Block
         for pos in self.wall:
@@ -101,17 +156,18 @@ class Env_CaC():
                                             pos[1]*self.grid_size+self.grid_SP[1],
                                             self.grid_size, self.grid_size))
         
-        # Select Block
-        if ((self.MX<self.MX_max) and (self.MY<self.MY_max)) and ((self.MX>=0) and (self.MY>=0)):
-            self.screen.blit(self.spr_select,(self.grid_SP[0]+self.grid_size*self.MX,
-                                              self.grid_SP[1]+self.grid_size*self.MY,
-                                              self.grid_size, self.grid_size))
-        
         # Obstacle Block
         for pos in self.obstacle:
             self.screen.blit(self.spr_block,(pos[0]*self.grid_size+self.grid_SP[0],
                                              pos[1]*self.grid_size+self.grid_SP[1],
                                              self.grid_size, self.grid_size))
+        
+        # Prey, Predator
+        if (self.mode!=0):
+            self.prey.rect.topleft = list(self.prey.pos)
+            self.screen.blit(self.prey.spr, self.prey.rect)
+            self.predator.rect.topleft = list(self.predator.pos)
+            self.screen.blit(self.predator.spr, self.predator.rect)
         
         self.G_clock.tick(G_FPS)
         pg.display.update()
@@ -119,13 +175,161 @@ class Env_CaC():
     
     def close(self):
         pg.quit()
+    
+    
+    ## Game Component
+    # Prey
+    class Prey:
+        def __init__(self, env, AI=False, pos=[0,0]):
+            self.env = env
+            
+            self.AI = AI
+            self.speed = env.speed_prey
+            
+            self.pos = Vec2(pos[0],pos[1]) # 픽셀 좌표
+            self.spr = env.spr_prey
+            self.rect = self.spr.get_rect()
+            
+            self.field = Vec2(0,0)
+            self.thres = 100
+            
+            self.vec_scale = (1/32)
+            self.k_self = -5
+            self.k_wall = 5
+            self.k_obstacle = 1
+            
+        
+        def __del__(self):
+            pass
+        
+        def move(self):
+            self.field = Vec2(0,0)
+            
+            # Predator Field
+            subfield = Field_Point(self.pos, env.predator.pos, K=env.predator.k_self, threshold=self.thres, scale=self.vec_scale)
+            self.field += subfield
+            
+            # Wall Field
+            for wall in self.env.vec_walls:
+                subfield = Field_Point(self.pos, wall, K=self.k_wall, threshold=self.thres, scale=self.vec_scale)
+                self.field += subfield
+            
+            # Obstacle Field
+            for obstacle in self.env.vec_obstacles:
+                subfield = Field_Point(self.pos, obstacle, K=self.k_obstacle, threshold=self.thres, scale=self.vec_scale)
+                self.field += subfield
+            
+            # Move by Field
+            force = self.field.unit()*self.speed
+            self.pos += force
+            
+            # Check Vaildity (Wall)
+            if (self.pos[0] < self.env.grid_SP[0]):
+                self.pos[0] = self.env.grid_SP[0]
+            elif (self.pos[0] > self.env.grid_EP[0]):
+                self.pos[0] = self.env.grid_EP[0]
+            if (self.pos[1] < self.env.grid_SP[1]):
+                self.pos[1] = self.env.grid_SP[1]
+            elif (self.pos[1] > self.env.grid_EP[1]):
+                self.pos[1] = self.env.grid_EP[1]
+            
+            # Check Vaildity (Obstacle)
+            for obstacle in self.env.vec_obstacles:
+                left = obstacle[0]-self.env.grid_size//2
+                top = obstacle[1]-self.env.grid_size//2
+                right = obstacle[0]+self.env.grid_size//2
+                bottom = obstacle[1]+self.env.grid_size//2
+                if all((self.pos[0]>left, self.pos[1]>top, self.pos[0]<right, self.pos[1]<bottom)):
+                    self.pos -= force
+            
+    
+    # Predator
+    class Predator:
+        def __init__(self, env, AI=False, pos=[0,0]):
+            self.env = env
+            
+            self.AI = AI
+            self.speed = env.speed_predator
+            
+            self.pos = Vec2(pos[0],pos[1]) # 픽셀 좌표
+            self.spr = env.spr_predator
+            self.rect = self.spr.get_rect()
+            
+            self.field = Vec2(0,0)
+            self.thres = 100
+            
+            self.k_self = 10
+            self.k_wall = 0
+        
+        def __del__(self):
+            pass
+
+
+def Field_Point(vec_ref, vec_point, K=1, threshold=10, scale=0.01):
+    vec_ref *= scale
+    vec_point *= scale
+    field = (vec_ref-vec_point).unit()/(abs(vec_ref-vec_point)**2)*K
+    if abs(field) > threshold:
+        field = field/abs(field)*threshold
+    
+    return field
+
+
+class Vec2: # 2차원 벡터 클래스
+    def __init__(self, x, y):
+        self.values = [x, y]
+        self.x = self.values[0]
+        self.y = self.values[1]
+
+    def __add__(self, other):
+        return Vec2(self.x + other.x, self.y + other.y)
+    
+    def __radd__(self, other):
+        return Vec2(self.x + other.x, self.y + other.y)
+
+    def __mul__(self, num):
+        return Vec2(num * self.x, num * self.y)
+    
+    def __rmul__(self, num):
+        return Vec2(num * self.x, num * self.y)
+
+    def __neg__(self):
+        return Vec2(-self.x, -self.y)
+
+    def __sub__(self, other):
+        return Vec2(self.x - other.x, self.y - other.y)
+    
+    def __truediv__(self, num):
+        return Vec2(self.x / num, self.y / num)
+
+    def __repr__(self):
+        return f"<{self.x}, {self.y}>"
+
+    def __abs__(self):
+        return (self.x**2 + self.y**2)**0.5
+    
+    def __getitem__(self, item):
+        return self.values.__getitem__(item)
+    
+    def __setitem__(self, key, value):
+        self.values.__setitem__(key, value)
+        self.x, self.y = self.values
+
+    def dot(self, other):
+        return self.x*other.x + self.y*other.y
+
+    def unit(self):
+        if abs(self)==0:
+            return self
+        else:
+            return self*(1/abs(self))
 
 
 #%%
 map_x = 10
 map_y = 10
 
-G_FPS = 5
+G_FPS = 30
 
 env = Env_CaC(grid_num=(map_x,map_y))
 
@@ -135,10 +339,23 @@ while True:
         if event.type == pg.QUIT:
             env.close()
             break
-        if event.type == pg.MOUSEMOTION: # 마우스의 움직임이 감지되면
-            env.mouse_x, env.mouse_y = pg.mouse.get_pos() # 마우스 x,y좌표값 저장
-        if event.type == pg.MOUSEBUTTONDOWN: # 마우스 클릭을 하면
-            if event.button == 1: # 왼쪽 클릭
-                env.step(1)
-            elif event.button == 3: # 오른쪽 클릭
-                env.step(0)
+        if (event.type == pg.KEYDOWN) and (event.key == pg.K_m):
+            env.step(0)
+        if (env.mode == 0): # edit
+            if event.type == pg.MOUSEMOTION: # 마우스의 움직임이 감지되면
+                env.mouse_x, env.mouse_y = pg.mouse.get_pos() # 마우스 x,y좌표값 저장
+            if event.type == pg.MOUSEBUTTONDOWN: # 마우스 클릭을 하면
+                if event.button == 1: # 왼쪽 클릭
+                    env.step(1)
+                elif event.button == 3: # 오른쪽 클릭
+                    env.step(2)
+        elif (env.mode == 1): # chasing
+            if event.type == pg.KEYDOWN:
+                if event.key == pg.K_RIGHT:
+                    env.step(1)
+                elif event.key == pg.K_UP:
+                    env.step(2)
+                elif event.key == pg.K_LEFT:
+                    env.step(3)
+                elif event.key == pg.K_DOWN:
+                    env.step(4)

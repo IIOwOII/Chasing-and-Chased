@@ -8,5 +8,8 @@ public class PrdInitializeMouseProcedure {
 			return;
 		entity.getPersistentData().putString("C_Name", "Prey");
 		entity.getPersistentData().putBoolean("C_Touch", false);
+		entity.getPersistentData().putDouble("k_opponent", 10);
+		entity.getPersistentData().putDouble("k_wall", 3);
+		entity.getPersistentData().putDouble("k_obstacle", 1);
 	}
 }

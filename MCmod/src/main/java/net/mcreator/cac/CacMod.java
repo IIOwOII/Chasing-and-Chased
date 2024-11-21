@@ -21,6 +21,7 @@ import net.mcreator.cac.init.CacModTabs;
 import net.mcreator.cac.init.CacModMobEffects;
 import net.mcreator.cac.init.CacModItems;
 import net.mcreator.cac.init.CacModEntities;
+import net.mcreator.cac.init.CacModBlocks;
 
 import java.util.function.Supplier;
 import java.util.function.Function;
@@ -41,6 +42,8 @@ public class CacMod {
 		// End of user code block mod constructor
 		MinecraftForge.EVENT_BUS.register(this);
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+
+		CacModBlocks.REGISTRY.register(bus);
 
 		CacModItems.REGISTRY.register(bus);
 		CacModEntities.REGISTRY.register(bus);

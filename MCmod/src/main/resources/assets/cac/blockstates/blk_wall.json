@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "cac:block/blk_wall"
+    },
+    "facing=east": {
+      "model": "cac:block/blk_wall",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "cac:block/blk_wall",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "cac:block/blk_wall",
+      "y": 270
+    }
+  }
+}
