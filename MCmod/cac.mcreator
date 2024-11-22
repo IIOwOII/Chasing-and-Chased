@@ -477,7 +477,16 @@
         "files": [
           "src/main/java/net/mcreator/cac/procedures/PrdTaskPreProcedure.java"
         ],
-        "dependencies": []
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
       },
       "path": "~/CacCommand"
     },
@@ -765,37 +774,6 @@
       "path": "~/CacBlock"
     },
     {
-      "name": "BlsObstacleUpdate",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "bls_obstacle_update",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/cac/procedures/BlsObstacleUpdateProcedure.java"
-        ],
-        "dependencies": [
-          {
-            "name": "x",
-            "type": "number"
-          },
-          {
-            "name": "y",
-            "type": "number"
-          },
-          {
-            "name": "z",
-            "type": "number"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ]
-      },
-      "path": "~/CacBlock"
-    },
-    {
       "name": "FncDistancePlayer",
       "type": "procedure",
       "compiles": true,
@@ -995,6 +973,209 @@
         ]
       },
       "path": "~/CacUtil"
+    },
+    {
+      "name": "FncFieldWall",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "fnc_field_wall",
+      "metadata": {
+        "return_type": "vector",
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/FncFieldWallProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/CacUtil"
+    },
+    {
+      "name": "FncDistanceWall",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "fnc_distance_wall",
+      "metadata": {
+        "return_type": "vectorlist",
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/FncDistanceWallProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/CacUtil"
+    },
+    {
+      "name": "BlsWall",
+      "type": "blockstates",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "bls_wall",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/cac/models/block/bls_wall_blockstate_2.json",
+          "src/main/resources/assets/cac/models/block/bls_wall_blockstate_5.json",
+          "src/main/resources/assets/cac/models/block/bls_wall_blockstate_1.json",
+          "src/main/resources/assets/cac/models/block/bls_wall_blockstate_4.json",
+          "src/main/resources/assets/cac/models/block/bls_wall_blockstate_0.json",
+          "src/main/resources/assets/cac/models/block/bls_wall_blockstate_3.json"
+        ]
+      },
+      "path": "~/CacBlock"
+    },
+    {
+      "name": "BlsFenceUpdate",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "bls_fence_update",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/BlsFenceUpdateProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/CacBlock"
+    },
+    {
+      "name": "OvlRest",
+      "type": "overlay",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "ovl_rest",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/client/screens/OvlRestOverlay.java"
+        ]
+      },
+      "path": "~/CacOverlay"
+    },
+    {
+      "name": "PrdStageRest",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "prd_stage_rest",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/PrdStageRestProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/CacCondition"
+    },
+    {
+      "name": "RtnStageRest",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "rtn_stage_rest",
+      "metadata": {
+        "return_type": "logic",
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/RtnStageRestProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/CacCondition"
+    },
+    {
+      "name": "EffApplyMorphPrey",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "eff_apply_morph_prey",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/EffApplyMorphPreyProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      },
+      "path": "~/CacEffect"
+    },
+    {
+      "name": "EffApplyMorphPredator",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "eff_apply_morph_predator",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/EffApplyMorphPredatorProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      },
+      "path": "~/CacEffect"
     }
   ],
   "variable_elements": [
@@ -1057,6 +1238,24 @@
       "type": "number",
       "scope": "map",
       "value": "1.0"
+    },
+    {
+      "name": "Pos_map_test",
+      "type": "vector",
+      "scope": "map",
+      "value": "Vec3.ZERO"
+    },
+    {
+      "name": "Exp_Rest",
+      "type": "logic",
+      "scope": "map",
+      "value": "false"
+    },
+    {
+      "name": "Pos_map",
+      "type": "vector",
+      "scope": "map",
+      "value": "Vec3.ZERO"
     }
   ],
   "sound_elements": [],

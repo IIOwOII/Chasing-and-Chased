@@ -23,6 +23,7 @@ def load_image(file):
 class Env_CaC():
     def __init__(self, grid_num=(10,10), speed_prey=8, speed_predator=8):
         self.mode = 0
+        self.show_field = 0
         
         # 그리드 설정
         self.grid_num = grid_num
@@ -39,7 +40,7 @@ class Env_CaC():
         self.speed_prey = speed_prey
         self.speed_predator = speed_predator
         
-        self.freq = 10
+        self.freq = int(self.grid_size/4)
         self.map_prey = np.zeros((grid_num[0]*self.freq, grid_num[1]*self.freq))
         self.map_predator = np.zeros((grid_num[0]*self.freq, grid_num[1]*self.freq))
         
@@ -112,6 +113,19 @@ class Env_CaC():
             elif (action==4):
                 self.predator.pos[1] += self.speed_predator
             self.prey.move()
+        elif (self.mode==2): # chased
+            if (action==1):
+                self.prey.pos[0] += self.speed_prey
+            elif (action==2):
+                self.prey.pos[1] -= self.speed_prey
+            elif (action==3):
+                self.prey.pos[0] -= self.speed_prey
+            elif (action==4):
+                self.prey.pos[1] += self.speed_prey
+            self.predator.move()
+        elif (self.mode==3): # AI
+            self.prey.move()
+            self.predator.move()
             
     
     def render_initialize(self):
@@ -119,10 +133,11 @@ class Env_CaC():
         pg.display.set_caption('CaC')
         
         # Screen 생성
-        self.screen = pg.display.set_mode((1080,1080))
+        self.screen = pg.display.set_mode((640,640))
         
         # clock 생성
         self.G_clock = pg.time.Clock()
+        self.G_font = pg.font.SysFont('Arial', 24)
         
         self.MX_max = self.grid_num[0] # 미만
         self.MY_max = self.grid_num[1] # 미만
@@ -130,7 +145,7 @@ class Env_CaC():
         # 스프라이트 생성
         self.spr_select = pg.transform.scale(load_image("Grid_Selected.png"), (self.grid_size,self.grid_size))
         self.spr_block = pg.transform.scale(load_image("Grid_White.png"), (self.grid_size,self.grid_size))
-        self.spr_wall = pg.transform.scale(load_image("Grid_Red.png"), (self.grid_size,self.grid_size))
+        self.spr_wall = pg.transform.scale(load_image("Grid_Green.png"), (self.grid_size,self.grid_size))
         self.spr_predator = pg.transform.scale(load_image("Spr_Yellow.png"), (self.grid_size//2,self.grid_size//2))
         self.spr_prey = pg.transform.scale(load_image("Spr_Cyan.png"), (self.grid_size//2,self.grid_size//2))
         
@@ -140,6 +155,39 @@ class Env_CaC():
     
     def render(self):
         self.screen.fill((0,0,0)) # 화면 검은색으로
+        
+        # field show 나중수정
+        if (self.show_field!=0): # Field On
+            if (self.show_field==1): # Prey
+                for x in range(self.map_prey.shape[0]):
+                    for y in range(self.map_prey.shape[0]):
+                        subscalar = 0
+                        for obstacle in self.vec_obstacles:
+                            subscalar += Field_Point_Scalar(((x+0.5)*self.freq+self.grid_SP[0], (y+0.5)*self.freq+self.grid_SP[1]), 
+                                                            tuple(obstacle), 
+                                                            K=self.prey.k_obstacle, threshold=self.prey.thres, scale=self.prey.vec_scale)
+                        for wall in self.vec_walls:
+                            subscalar += Field_Point_Scalar(((x+0.5)*self.freq+self.grid_SP[0], (y+0.5)*self.freq+self.grid_SP[1]), 
+                                                            tuple(wall), 
+                                                            K=self.prey.k_wall, threshold=self.prey.thres, scale=self.prey.vec_scale)
+                        subscalar += Field_Point_Scalar(((x+0.5)*self.freq+self.grid_SP[0], (y+0.5)*self.freq+self.grid_SP[1]), 
+                                                        tuple(self.predator.pos),
+                                                        K=self.predator.k_self, threshold=self.prey.thres, scale=self.prey.vec_scale)
+                        
+                        self.map_prey[x,y] = subscalar
+            
+            # 나중 수정
+            self.map_field = self.map_prey/abs(self.map_prey).max()
+            # self.map_field = np.log((self.map_prey/abs(self.map_prey).max())+1)
+            for x in range(self.map_field.shape[0]):
+                for y in range(self.map_field.shape[0]):
+                    scalar = self.map_field[x,y]
+                    if (scalar>=0):
+                        color = (255*scalar,0,0)
+                    else:
+                        color = (0,0,255*scalar)
+                    pg.draw.rect(self.screen, color, 
+                                 [x*self.freq+self.grid_SP[0], y*self.freq+self.grid_SP[1], self.freq, self.freq])
         
         # Select Block
         if (self.mode==0): # edit
@@ -162,12 +210,23 @@ class Env_CaC():
                                              pos[1]*self.grid_size+self.grid_SP[1],
                                              self.grid_size, self.grid_size))
         
-        # Prey, Predator
+        # Play
         if (self.mode!=0):
             self.prey.rect.topleft = list(self.prey.pos)
             self.screen.blit(self.prey.spr, self.prey.rect)
             self.predator.rect.topleft = list(self.predator.pos)
             self.screen.blit(self.predator.spr, self.predator.rect)
+            
+            txts = []
+            txts.append(self.G_font.render(f'py_wall = {self.prey.k_wall:.1f}', True, (255,255,255)))
+            txts.append(self.G_font.render(f'pd_wall = {self.predator.k_wall:.1f}', True, (255,255,255)))
+            txts.append(self.G_font.render(f'py_obstacle = {self.prey.k_obstacle:.1f}', True, (255,255,255)))
+            txts.append(self.G_font.render(f'pd_obstacle = {self.predator.k_obstacle:.1f}', True, (255,255,255)))
+            txts.append(self.G_font.render(f'py = {self.prey.k_self:.1f}', True, (255,255,255)))
+            txts.append(self.G_font.render(f'pd = {self.predator.k_self:.1f}', True, (255,255,255)))
+            for idx, txt in enumerate(txts):
+                self.screen.blit(txt, (self.grid_EP[0]+self.grid_size*2, self.grid_SP[1]+64*idx))
+        
         
         self.G_clock.tick(G_FPS)
         pg.display.update()
@@ -193,9 +252,9 @@ class Env_CaC():
             self.field = Vec2(0,0)
             self.thres = 100
             
-            self.vec_scale = (1/32)
-            self.k_self = -5
-            self.k_wall = 5
+            self.vec_scale = (1/self.env.grid_size)
+            self.k_self = -10
+            self.k_wall = 3
             self.k_obstacle = 1
             
         
@@ -258,11 +317,53 @@ class Env_CaC():
             self.field = Vec2(0,0)
             self.thres = 100
             
+            self.vec_scale = (1/self.env.grid_size)
             self.k_self = 10
-            self.k_wall = 0
+            self.k_wall = 3
+            self.k_obstacle = 1
         
         def __del__(self):
             pass
+        
+        def move(self):
+            self.field = Vec2(0,0)
+            
+            # Prey Field
+            subfield = Field_Point(self.pos, env.prey.pos, K=env.prey.k_self, threshold=self.thres, scale=self.vec_scale)
+            self.field += subfield
+            
+            # Wall Field
+            for wall in self.env.vec_walls:
+                subfield = Field_Point(self.pos, wall, K=self.k_wall, threshold=self.thres, scale=self.vec_scale)
+                self.field += subfield
+            
+            # Obstacle Field
+            for obstacle in self.env.vec_obstacles:
+                subfield = Field_Point(self.pos, obstacle, K=self.k_obstacle, threshold=self.thres, scale=self.vec_scale)
+                self.field += subfield
+            
+            # Move by Field
+            force = self.field.unit()*self.speed
+            self.pos += force
+            
+            # Check Vaildity (Wall)
+            if (self.pos[0] < self.env.grid_SP[0]):
+                self.pos[0] = self.env.grid_SP[0]
+            elif (self.pos[0] > self.env.grid_EP[0]):
+                self.pos[0] = self.env.grid_EP[0]
+            if (self.pos[1] < self.env.grid_SP[1]):
+                self.pos[1] = self.env.grid_SP[1]
+            elif (self.pos[1] > self.env.grid_EP[1]):
+                self.pos[1] = self.env.grid_EP[1]
+            
+            # Check Vaildity (Obstacle)
+            for obstacle in self.env.vec_obstacles:
+                left = obstacle[0]-self.env.grid_size//2
+                top = obstacle[1]-self.env.grid_size//2
+                right = obstacle[0]+self.env.grid_size//2
+                bottom = obstacle[1]+self.env.grid_size//2
+                if all((self.pos[0]>left, self.pos[1]>top, self.pos[0]<right, self.pos[1]<bottom)):
+                    self.pos -= force
 
 
 def Field_Point(vec_ref, vec_point, K=1, threshold=10, scale=0.01):
@@ -273,6 +374,14 @@ def Field_Point(vec_ref, vec_point, K=1, threshold=10, scale=0.01):
         field = field/abs(field)*threshold
     
     return field
+
+
+def Field_Point_Scalar(pos_ref, pos_point, K=1, threshold=100, scale=0.1):
+    scalar = K/((scale**2)*((pos_ref[0]-pos_point[0])**2+(pos_ref[1]-pos_point[1])**2))
+    if scalar > threshold:
+        scalar = threshold
+    
+    return scalar
 
 
 class Vec2: # 2차원 벡터 클래스
@@ -341,6 +450,8 @@ while True:
             break
         if (event.type == pg.KEYDOWN) and (event.key == pg.K_m):
             env.step(0)
+        elif (event.type == pg.KEYDOWN) and (event.key == pg.K_n):
+            env.show_field = (env.show_field+1)%3
         if (env.mode == 0): # edit
             if event.type == pg.MOUSEMOTION: # 마우스의 움직임이 감지되면
                 env.mouse_x, env.mouse_y = pg.mouse.get_pos() # 마우스 x,y좌표값 저장
@@ -349,7 +460,7 @@ while True:
                     env.step(1)
                 elif event.button == 3: # 오른쪽 클릭
                     env.step(2)
-        elif (env.mode == 1): # chasing
+        elif (env.mode != 0): # play
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_RIGHT:
                     env.step(1)
@@ -359,3 +470,27 @@ while True:
                     env.step(3)
                 elif event.key == pg.K_DOWN:
                     env.step(4)
+                if event.key == pg.K_q:
+                    env.prey.k_wall += 0.2
+                elif event.key == pg.K_a:
+                    env.prey.k_wall -= 0.2
+                elif event.key == pg.K_w:
+                    env.predator.k_wall += 0.2
+                elif event.key == pg.K_s:
+                    env.predator.k_wall -= 0.2
+                elif event.key == pg.K_e:
+                    env.prey.k_obstacle += 0.2
+                elif event.key == pg.K_d:
+                    env.prey.k_obstacle -= 0.2
+                elif event.key == pg.K_r:
+                    env.predator.k_obstacle += 0.2
+                elif event.key == pg.K_f:
+                    env.predator.k_obstacle -= 0.2
+                elif event.key == pg.K_t:
+                    env.prey.k_self += 0.2
+                elif event.key == pg.K_g:
+                    env.prey.k_self -= 0.2
+                elif event.key == pg.K_y:
+                    env.predator.k_self += 0.2
+                elif event.key == pg.K_h:
+                    env.predator.k_self -= 0.2

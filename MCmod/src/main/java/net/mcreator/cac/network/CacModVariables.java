@@ -7,6 +7,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.LevelAccessor;
@@ -14,6 +15,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.DoubleTag;
 import net.minecraft.nbt.CompoundTag;
 
 import net.mcreator.cac.CacMod;
@@ -97,6 +100,9 @@ public class CacModVariables {
 		public boolean Switch_Task = false;
 		public double Pmt_far = 16.0;
 		public double Pmt_distance_scale = 1.0;
+		public Vec3 Pos_map_test = Vec3.ZERO;
+		public boolean Exp_Rest = false;
+		public Vec3 Pos_map = Vec3.ZERO;
 
 		public static MapVariables load(CompoundTag tag) {
 			MapVariables data = new MapVariables();
@@ -115,6 +121,15 @@ public class CacModVariables {
 			Switch_Task = nbt.getBoolean("Switch_Task");
 			Pmt_far = nbt.getDouble("Pmt_far");
 			Pmt_distance_scale = nbt.getDouble("Pmt_distance_scale");
+			{
+				ListTag listTag = nbt.getList("Pos_map_test", 6);
+				this.Pos_map_test = new Vec3(listTag.getDouble(0), listTag.getDouble(1), listTag.getDouble(2));
+			}
+			Exp_Rest = nbt.getBoolean("Exp_Rest");
+			{
+				ListTag listTag = nbt.getList("Pos_map", 6);
+				this.Pos_map = new Vec3(listTag.getDouble(0), listTag.getDouble(1), listTag.getDouble(2));
+			}
 		}
 
 		@Override
@@ -129,6 +144,23 @@ public class CacModVariables {
 			nbt.putBoolean("Switch_Task", Switch_Task);
 			nbt.putDouble("Pmt_far", Pmt_far);
 			nbt.putDouble("Pmt_distance_scale", Pmt_distance_scale);
+			{
+				this.Pos_map_test = this.Pos_map_test == null ? Vec3.ZERO : this.Pos_map_test;
+				ListTag listTag = new ListTag();
+				listTag.addTag(0, DoubleTag.valueOf(this.Pos_map_test.x()));
+				listTag.addTag(1, DoubleTag.valueOf(this.Pos_map_test.y()));
+				listTag.addTag(2, DoubleTag.valueOf(this.Pos_map_test.z()));
+				nbt.put("Pos_map_test", listTag);
+			}
+			nbt.putBoolean("Exp_Rest", Exp_Rest);
+			{
+				this.Pos_map = this.Pos_map == null ? Vec3.ZERO : this.Pos_map;
+				ListTag listTag = new ListTag();
+				listTag.addTag(0, DoubleTag.valueOf(this.Pos_map.x()));
+				listTag.addTag(1, DoubleTag.valueOf(this.Pos_map.y()));
+				listTag.addTag(2, DoubleTag.valueOf(this.Pos_map.z()));
+				nbt.put("Pos_map", listTag);
+			}
 			return nbt;
 		}
 

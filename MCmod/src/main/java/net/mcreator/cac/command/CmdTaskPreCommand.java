@@ -32,7 +32,7 @@ public class CmdTaskPreCommand {
 					if (entity != null)
 						direction = entity.getDirection();
 
-					PrdTaskPreProcedure.execute();
+					PrdTaskPreProcedure.execute(world, entity);
 					return 0;
 				}));
 	}

@@ -10,6 +10,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.chat.Component;
 import net.minecraft.core.BlockPos;
 
+import net.mcreator.cac.CacMod;
+
 public class PrdTouchProcedure {
 	public static void execute(LevelAccessor world, double x, double y, double z, Entity entity) {
 		if (entity == null)
@@ -32,6 +34,11 @@ public class PrdTouchProcedure {
 				if (!world.isClientSide() && world.getServer() != null)
 					world.getServer().getPlayerList().broadcastSystemMessage(Component.literal("You got caught!"), false);
 			}
+			CacMod.queueServerWork(100, () -> {
+				PrdStageRestProcedure.execute(world);
+				if (!entity.level().isClientSide())
+					entity.discard();
+			});
 		}
 	}
 }

@@ -28,7 +28,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
 
-import net.mcreator.cac.procedures.BlsObstacleUpdateProcedure;
+import net.mcreator.cac.procedures.BlsFenceUpdateProcedure;
 
 public class BlkObstacleBlock extends Block {
 	public static final IntegerProperty BLOCKSTATE = IntegerProperty.create("blockstate", 0, 6);
@@ -159,12 +159,12 @@ public class BlkObstacleBlock extends Block {
 	@Override
 	public void onPlace(BlockState blockstate, Level world, BlockPos pos, BlockState oldState, boolean moving) {
 		super.onPlace(blockstate, world, pos, oldState, moving);
-		BlsObstacleUpdateProcedure.execute(world, pos.getX(), pos.getY(), pos.getZ());
+		BlsFenceUpdateProcedure.execute(world, pos.getX(), pos.getY(), pos.getZ());
 	}
 
 	@Override
 	public void neighborChanged(BlockState blockstate, Level world, BlockPos pos, Block neighborBlock, BlockPos fromPos, boolean moving) {
 		super.neighborChanged(blockstate, world, pos, neighborBlock, fromPos, moving);
-		BlsObstacleUpdateProcedure.execute(world, pos.getX(), pos.getY(), pos.getZ());
+		BlsFenceUpdateProcedure.execute(world, pos.getX(), pos.getY(), pos.getZ());
 	}
 }
