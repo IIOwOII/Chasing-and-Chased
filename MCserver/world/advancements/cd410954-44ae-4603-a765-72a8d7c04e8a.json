@@ -192,6 +192,12 @@
     },
     "done": true
   },
+  "minecraft:adventure/root": {
+    "criteria": {
+      "killed_something": "2024-09-11 15:50:07 +0900"
+    },
+    "done": true
+  },
   "minecraft:recipes/combat/bow": {
     "criteria": {
       "has_string": "2024-09-11 15:51:18 +0900"
@@ -201,12 +207,6 @@
   "minecraft:recipes/tools/fishing_rod": {
     "criteria": {
       "has_string": "2024-09-11 15:51:18 +0900"
-    },
-    "done": true
-  },
-  "minecraft:adventure/root": {
-    "criteria": {
-      "killed_something": "2024-09-11 15:50:07 +0900"
     },
     "done": true
   },
@@ -240,5 +240,5 @@
     },
     "done": true
   },
-  "DataVersion": 3337
+  "DataVersion": 3465
 }

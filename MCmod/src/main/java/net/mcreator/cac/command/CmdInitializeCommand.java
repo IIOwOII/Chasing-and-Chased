@@ -18,7 +18,7 @@ import net.mcreator.cac.procedures.PrdInitializeProcedure;
 public class CmdInitializeCommand {
 	@SubscribeEvent
 	public static void registerCommand(RegisterCommandsEvent event) {
-		event.getDispatcher().register(Commands.literal("CaC_Initialize")
+		event.getDispatcher().register(Commands.literal("cac_initialize")
 
 				.executes(arguments -> {
 					Level world = arguments.getSource().getUnsidedLevel();
@@ -32,7 +32,7 @@ public class CmdInitializeCommand {
 					if (entity != null)
 						direction = entity.getDirection();
 
-					PrdInitializeProcedure.execute(world);
+					PrdInitializeProcedure.execute(world, entity);
 					return 0;
 				}));
 	}

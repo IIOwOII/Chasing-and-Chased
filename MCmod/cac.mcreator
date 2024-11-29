@@ -79,7 +79,13 @@
         "files": [
           "src/main/java/net/mcreator/cac/procedures/RtnTouchProcedure.java"
         ],
-        "dependencies": []
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ],
+        "return_type": "logic"
       },
       "path": "~/CacCondition"
     },
@@ -189,33 +195,6 @@
         ]
       },
       "path": "~/CacCommand"
-    },
-    {
-      "name": "UdtPlayerPosition",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "udt_player_position",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/cac/procedures/UdtPlayerPositionProcedure.java"
-        ],
-        "dependencies": [
-          {
-            "name": "x",
-            "type": "number"
-          },
-          {
-            "name": "z",
-            "type": "number"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ]
-      },
-      "path": "~/CacUpdate"
     },
     {
       "name": "CacTestItem",
@@ -466,42 +445,6 @@
         ]
       },
       "path": "~/CacEntity"
-    },
-    {
-      "name": "PrdTaskPre",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "prd_task_pre",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/cac/procedures/PrdTaskPreProcedure.java"
-        ],
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          },
-          {
-            "name": "world",
-            "type": "world"
-          }
-        ]
-      },
-      "path": "~/CacCommand"
-    },
-    {
-      "name": "CmdTaskPre",
-      "type": "command",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "cmd_task_pre",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/cac/command/CmdTaskPreCommand.java"
-        ]
-      },
-      "path": "~/CacCommand"
     },
     {
       "name": "PrdInitializeMouse",
@@ -922,6 +865,10 @@
         ],
         "dependencies": [
           {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
             "name": "world",
             "type": "world"
           }
@@ -1176,6 +1123,256 @@
         ]
       },
       "path": "~/CacEffect"
+    },
+    {
+      "name": "UdtTimer",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "udt_timer",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/UdtTimerProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/CacUpdate"
+    },
+    {
+      "name": "CmdTp",
+      "type": "command",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "cmd_tp",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/command/CmdTpCommand.java"
+        ]
+      },
+      "path": "~/CacCommand"
+    },
+    {
+      "name": "PrdTp",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "prd_tp",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/PrdTpProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "arguments",
+            "type": "cmdcontext"
+          },
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      },
+      "path": "~/CacCommand"
+    },
+    {
+      "name": "UdtEventStart",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "udt_event_start",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/UdtEventStartProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/CacUpdate"
+    },
+    {
+      "name": "CmdTaskPresession",
+      "type": "command",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "cmd_task_presession",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/command/CmdTaskPresessionCommand.java"
+        ]
+      },
+      "path": "~/CacTask/Presession"
+    },
+    {
+      "name": "TaskPresessionStart",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "task_presession_start",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/TaskPresessionStartProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "arguments",
+            "type": "cmdcontext"
+          },
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/CacTask/Presession"
+    },
+    {
+      "name": "PrdIntroduction",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "prd_introduction",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/PrdIntroductionProcedure.java"
+        ],
+        "dependencies": []
+      },
+      "path": "~/CacCommand"
+    },
+    {
+      "name": "CmdIntroduction",
+      "type": "command",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "cmd_introduction",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/command/CmdIntroductionCommand.java"
+        ]
+      },
+      "path": "~/CacCommand"
+    },
+    {
+      "name": "EffStopMove",
+      "type": "potioneffect",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "eff_stop_move",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/potion/EffStopMoveMobEffect.java"
+        ]
+      },
+      "path": "~/CacEffect"
+    },
+    {
+      "name": "EffOnStopMove",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "eff_on_stop_move",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/EffOnStopMoveProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      },
+      "path": "~/CacEffect"
+    },
+    {
+      "name": "EffOffStopMove",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "eff_off_stop_move",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/EffOffStopMoveProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      },
+      "path": "~/CacEffect"
+    },
+    {
+      "name": "TaskPresessionShowmap",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "task_presession_showmap",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/TaskPresessionShowmapProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/CacTask/Presession"
+    },
+    {
+      "name": "UdtPlayer",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "udt_player",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/UdtPlayerProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/CacUpdate"
     }
   ],
   "variable_elements": [
@@ -1240,22 +1437,28 @@
       "value": "1.0"
     },
     {
-      "name": "Pos_map_test",
-      "type": "vector",
-      "scope": "map",
-      "value": "Vec3.ZERO"
-    },
-    {
       "name": "Exp_Rest",
       "type": "logic",
       "scope": "map",
       "value": "false"
     },
     {
-      "name": "Pos_map",
-      "type": "vector",
+      "name": "Timer_time",
+      "type": "number",
       "scope": "map",
-      "value": "Vec3.ZERO"
+      "value": "0.0"
+    },
+    {
+      "name": "Timer_event",
+      "type": "string",
+      "scope": "map",
+      "value": "\"none\""
+    },
+    {
+      "name": "Timer_show",
+      "type": "string",
+      "scope": "map",
+      "value": "\"none\""
     }
   ],
   "sound_elements": [],
@@ -1270,6 +1473,7 @@
     "en_us": {
       "item.cac.ent_mouse_spawn_egg": "Prey Spawn Egg",
       "item.cac.cac_test_item": "CacTester",
+      "effect.cac.eff_stop_move": "Stiffness",
       "item.cac.ent_player_cat_spawn_egg": "Predator(Player) Spawn Egg",
       "entity.cac.ent_cat": "Predator",
       "entity.cac.ent_player_mouse": "Prey(Player)",
@@ -1327,13 +1531,22 @@
       {
         "name": "CacUtil",
         "children": []
+      },
+      {
+        "name": "CacTask",
+        "children": [
+          {
+            "name": "Presession",
+            "children": []
+          }
+        ]
       }
     ]
   },
   "workspaceSettings": {
     "modid": "cac",
     "modName": "CaC",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "author": "owo, MCreator",
     "websiteURL": "https://mcreator.net",
     "license": "Academic Free License v3.0",

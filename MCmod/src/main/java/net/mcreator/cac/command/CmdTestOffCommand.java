@@ -18,7 +18,7 @@ import net.mcreator.cac.procedures.PrdTestOffProcedure;
 public class CmdTestOffCommand {
 	@SubscribeEvent
 	public static void registerCommand(RegisterCommandsEvent event) {
-		event.getDispatcher().register(Commands.literal("CaC_Test_Off")
+		event.getDispatcher().register(Commands.literal("cac_test_off")
 
 				.executes(arguments -> {
 					Level world = arguments.getSource().getUnsidedLevel();

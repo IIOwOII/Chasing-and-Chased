@@ -21,8 +21,9 @@ def load_image(file):
 
 #%%
 class Env_CaC():
-    def __init__(self, grid_num=(10,10), speed_prey=8, speed_predator=8):
+    def __init__(self, mode_field=0, grid_num=(16,16), speed_prey=8, speed_predator=8):
         self.mode = 0
+        self.mode_field = mode_field # 전하의 차원
         self.show_field = 0
         
         # 그리드 설정
@@ -34,8 +35,8 @@ class Env_CaC():
         
         self.mouse_x = 0
         self.mouse_y = 0
-        self.MX = 0
-        self.MY = 0
+        self.pos_MX = 0
+        self.pos_MY = 0
         
         self.speed_prey = speed_prey
         self.speed_predator = speed_predator
@@ -44,22 +45,11 @@ class Env_CaC():
         self.map_prey = np.zeros((grid_num[0]*self.freq, grid_num[1]*self.freq))
         self.map_predator = np.zeros((grid_num[0]*self.freq, grid_num[1]*self.freq))
         
-        self.obstacle = []
-        self.vec_obstacles = [] # center 위치 픽셀 좌표
-        self.wall = []
-        self.vec_walls = []
-        self.wall.append((-1,-1))
-        self.wall.append((-1,grid_num[1]))
-        self.wall.append((grid_num[0],-1))
-        self.wall.append(grid_num)
-        for wall in itertools.product(np.arange(0,grid_num[0]),np.array([-1,grid_num[1]])):
-            self.wall.append(wall)
-        for wall in itertools.product(np.array([-1,grid_num[0]]),np.arange(0,grid_num[1])):
-            self.wall.append(wall)
-        
-        for wall in self.wall:
-            self.vec_walls.append(Vec2(self.grid_SP[0]+(wall[0]*self.grid_size)+self.grid_size//2, 
-                                       self.grid_SP[1]+(wall[1]*self.grid_size)+self.grid_size//2))
+        self.mode_build = 0 # 구조물 모양
+        self.pos_otl = [] # grid postion of obstacle
+        self.vec_otl = [] # center 위치 픽셀 좌표 (grid_SP 제외)
+        self.pos_wal = [] # grid position of wall
+        self.vec_wal = []
         
         self.render_initialize()
     
@@ -79,51 +69,81 @@ class Env_CaC():
                     predator_pos = (np.random.randint(0,self.grid_num[0]), np.random.randint(0,self.grid_num[1]))
                     if (prey_pos == predator_pos):
                         available = False
-                    for pos in self.obstacle:
+                    for pos in self.pos_otl:
+                        if (pos == prey_pos) or (pos == predator_pos):
+                            available = False
+                    for pos in self.pos_wal:
                         if (pos == prey_pos) or (pos == predator_pos):
                             available = False
                 
-                self.prey = self.Prey(self, (self.mode%2==1), np.array(prey_pos)*self.grid_size+self.grid_SP)
-                self.predator = self.Predator(self, (self.mode>=2), np.array(predator_pos)*self.grid_size+self.grid_SP)
+                self.prey = self.Prey(self, (self.mode%2==1), np.array(prey_pos)*self.grid_size)
+                self.predator = self.Predator(self, (self.mode>=2), np.array(predator_pos)*self.grid_size)
         
-        if (self.mode==0): # edit
-            self.MX = (self.mouse_x-self.grid_SP[0])//self.grid_size
-            self.MY = (self.mouse_y-self.grid_SP[1])//self.grid_size
-            if (action==1): # 설치
-                pos = (self.MX, self.MY)
-                if pos in self.obstacle: # 이미 설치되었다면 지움
-                    idx = self.obstacle.index(pos)
-                    del self.obstacle[idx]
-                    del self.vec_obstacles[idx]
+        # Mode : edit
+        if (self.mode==0):
+            # Mouse position
+            self.pos_MX = (self.mouse_x-self.grid_SP[0])//self.grid_size
+            self.pos_MY = (self.mouse_y-self.grid_SP[1])//self.grid_size
+            pos_M = (self.pos_MX, self.pos_MY)
+            
+            # Validity of mouse position
+            if ((pos_M[0]<self.pos_MX_max) and (pos_M[1]<self.pos_MY_max)) and ((pos_M[0]>=0) and (pos_M[1]>=0)):
+                vaild_M = True
+            else:
+                vaild_M = False
+                
+            if (action==1): # obstacle 설치
+                if pos_M in self.pos_otl: # 이미 설치되었다면 지움
+                    idx = self.pos_otl.index(pos_M)
+                    del self.pos_otl[idx]
+                    del self.vec_otl[idx]
                 else: # 없다면 설치
-                    if ((pos[0]<self.MX_max) and (pos[1]<self.MY_max)) and ((pos[0]>=0) and (pos[1]>=0)):
-                        self.obstacle.append(pos)
-                        self.vec_obstacles.append(Vec2(self.grid_SP[0]+(pos[0]*self.grid_size)+self.grid_size//2, 
-                                                       self.grid_SP[1]+(pos[1]*self.grid_size)+self.grid_size//2))
-            elif (action==2): # 리셋
-                self.obstacle = []
-                self.vec_obstacles = []
-        elif (self.mode==1): # chasing
+                    if vaild_M:
+                        self.pos_otl.append(pos_M)
+                        self.vec_otl.append(Vec2(pos_M[0]*self.grid_size+self.grid_size//2, 
+                                                 pos_M[1]*self.grid_size+self.grid_size//2))
+            elif (action==2): # wall 설치
+                if pos_M in self.pos_wal: # 이미 설치되었다면 지움
+                    idx = self.pos_wal.index(pos_M)
+                    del self.pos_wal[idx]
+                    del self.vec_wal[idx]
+                else: # 없다면 설치
+                    if vaild_M:
+                        self.pos_wal.append(pos_M)
+                        self.vec_wal.append(Vec2(pos_M[0]*self.grid_size+self.grid_size//2, 
+                                                 pos_M[1]*self.grid_size+self.grid_size//2))
+            elif (action==3): # 리셋
+                self.pos_otl = []
+                self.vec_otl = []
+                self.pos_wal = []
+                self.vec_wal = []
+        
+        # Mode : chasing
+        elif (self.mode==1):
             if (action==1):
-                self.predator.pos[0] += self.speed_predator
+                self.predator.vec[0] += self.speed_predator
             elif (action==2):
-                self.predator.pos[1] -= self.speed_predator
+                self.predator.vec[1] -= self.speed_predator
             elif (action==3):
-                self.predator.pos[0] -= self.speed_predator
+                self.predator.vec[0] -= self.speed_predator
             elif (action==4):
-                self.predator.pos[1] += self.speed_predator
+                self.predator.vec[1] += self.speed_predator
             self.prey.move()
-        elif (self.mode==2): # chased
+        
+        # Mode : chased
+        elif (self.mode==2):
             if (action==1):
-                self.prey.pos[0] += self.speed_prey
+                self.prey.vec[0] += self.speed_prey
             elif (action==2):
-                self.prey.pos[1] -= self.speed_prey
+                self.prey.vec[1] -= self.speed_prey
             elif (action==3):
-                self.prey.pos[0] -= self.speed_prey
+                self.prey.vec[0] -= self.speed_prey
             elif (action==4):
-                self.prey.pos[1] += self.speed_prey
+                self.prey.vec[1] += self.speed_prey
             self.predator.move()
-        elif (self.mode==3): # AI
+        
+        # Mode : AI
+        elif (self.mode==3):
             self.prey.move()
             self.predator.move()
             
@@ -139,8 +159,8 @@ class Env_CaC():
         self.G_clock = pg.time.Clock()
         self.G_font = pg.font.SysFont('Arial', 24)
         
-        self.MX_max = self.grid_num[0] # 미만
-        self.MY_max = self.grid_num[1] # 미만
+        self.pos_MX_max = self.grid_num[0] # 미만
+        self.pos_MY_max = self.grid_num[1] # 미만
         
         # 스프라이트 생성
         self.spr_select = pg.transform.scale(load_image("Grid_Selected.png"), (self.grid_size,self.grid_size))
@@ -162,13 +182,13 @@ class Env_CaC():
                 for x in range(self.map_prey.shape[0]):
                     for y in range(self.map_prey.shape[0]):
                         subscalar = 0
-                        for obstacle in self.vec_obstacles:
+                        for otl in self.vec_otl:
                             subscalar += Field_Point_Scalar(((x+0.5)*self.freq+self.grid_SP[0], (y+0.5)*self.freq+self.grid_SP[1]), 
-                                                            tuple(obstacle), 
+                                                            tuple(otl), 
                                                             K=self.prey.k_obstacle, threshold=self.prey.thres, scale=self.prey.vec_scale)
-                        for wall in self.vec_walls:
+                        for wal in self.vec_wal:
                             subscalar += Field_Point_Scalar(((x+0.5)*self.freq+self.grid_SP[0], (y+0.5)*self.freq+self.grid_SP[1]), 
-                                                            tuple(wall), 
+                                                            tuple(wal), 
                                                             K=self.prey.k_wall, threshold=self.prey.thres, scale=self.prey.vec_scale)
                         subscalar += Field_Point_Scalar(((x+0.5)*self.freq+self.grid_SP[0], (y+0.5)*self.freq+self.grid_SP[1]), 
                                                         tuple(self.predator.pos),
@@ -191,30 +211,42 @@ class Env_CaC():
         
         # Select Block
         if (self.mode==0): # edit
-            self.MX = (self.mouse_x-self.grid_SP[0])//self.grid_size
-            self.MY = (self.mouse_y-self.grid_SP[1])//self.grid_size
-            if ((self.MX<self.MX_max) and (self.MY<self.MY_max)) and ((self.MX>=0) and (self.MY>=0)):
-                self.screen.blit(self.spr_select,(self.grid_SP[0]+self.grid_size*self.MX,
-                                                  self.grid_SP[1]+self.grid_size*self.MY,
+            # Mouse position
+            self.pos_MX = (self.mouse_x-self.grid_SP[0])//self.grid_size
+            self.pos_MY = (self.mouse_y-self.grid_SP[1])//self.grid_size
+            pos_M = (self.pos_MX, self.pos_MY)
+            
+            # Validity of mouse position
+            if ((pos_M[0]<self.pos_MX_max) and (pos_M[1]<self.pos_MY_max)) and ((pos_M[0]>=0) and (pos_M[1]>=0)):
+                vaild_M = True
+            else:
+                vaild_M = False
+            
+            if vaild_M:
+                self.screen.blit(self.spr_select,(self.grid_SP[0]+self.grid_size*self.pos_MX,
+                                                  self.grid_SP[1]+self.grid_size*self.pos_MY,
                                                   self.grid_size, self.grid_size))
         
         ## Wall Block
-        for pos in self.wall:
-            self.screen.blit(self.spr_wall,(pos[0]*self.grid_size+self.grid_SP[0],
-                                            pos[1]*self.grid_size+self.grid_SP[1],
-                                            self.grid_size, self.grid_size))
+        for pos in self.pos_wal:
+            self.screen.blit(self.spr_wall,
+                             (pos[0]*self.grid_size+self.grid_SP[0], pos[1]*self.grid_size+self.grid_SP[1],
+                              self.grid_size, self.grid_size))
         
         # Obstacle Block
-        for pos in self.obstacle:
-            self.screen.blit(self.spr_block,(pos[0]*self.grid_size+self.grid_SP[0],
-                                             pos[1]*self.grid_size+self.grid_SP[1],
-                                             self.grid_size, self.grid_size))
+        for pos in self.pos_otl:
+            self.screen.blit(self.spr_block,
+                             (pos[0]*self.grid_size+self.grid_SP[0], pos[1]*self.grid_size+self.grid_SP[1],
+                              self.grid_size, self.grid_size))
         
         # Play
         if (self.mode!=0):
-            self.prey.rect.topleft = list(self.prey.pos)
+            self.prey.rect.centerx = self.prey.vec[0]+self.grid_SP[0]
+            self.prey.rect.centery = self.prey.vec[1]+self.grid_SP[1]
             self.screen.blit(self.prey.spr, self.prey.rect)
-            self.predator.rect.topleft = list(self.predator.pos)
+            
+            self.predator.rect.centerx = self.predator.vec[0]+self.grid_SP[0]
+            self.predator.rect.centery = self.predator.vec[1]+self.grid_SP[1]
             self.screen.blit(self.predator.spr, self.predator.rect)
             
             txts = []
@@ -245,7 +277,7 @@ class Env_CaC():
             self.AI = AI
             self.speed = env.speed_prey
             
-            self.pos = Vec2(pos[0],pos[1]) # 픽셀 좌표
+            self.vec = Vec2(pos[0],pos[1]) # 픽셀 좌표
             self.spr = env.spr_prey
             self.rect = self.spr.get_rect()
             
@@ -265,41 +297,22 @@ class Env_CaC():
             self.field = Vec2(0,0)
             
             # Predator Field
-            subfield = Field_Point(self.pos, env.predator.pos, K=env.predator.k_self, threshold=self.thres, scale=self.vec_scale)
+            subfield = Field_Point(self.vec, env.predator.vec, K=env.predator.k_self, threshold=self.thres, scale=self.vec_scale)
             self.field += subfield
             
             # Wall Field
-            for wall in self.env.vec_walls:
-                subfield = Field_Point(self.pos, wall, K=self.k_wall, threshold=self.thres, scale=self.vec_scale)
+            for wall in self.env.vec_wal:
+                subfield = Field_Point(self.vec, wall, K=self.k_wall, threshold=self.thres, scale=self.vec_scale)
                 self.field += subfield
             
             # Obstacle Field
-            for obstacle in self.env.vec_obstacles:
-                subfield = Field_Point(self.pos, obstacle, K=self.k_obstacle, threshold=self.thres, scale=self.vec_scale)
+            for obstacle in self.env.vec_otl:
+                subfield = Field_Point(self.vec, obstacle, K=self.k_obstacle, threshold=self.thres, scale=self.vec_scale)
                 self.field += subfield
             
             # Move by Field
             force = self.field.unit()*self.speed
-            self.pos += force
-            
-            # Check Vaildity (Wall)
-            if (self.pos[0] < self.env.grid_SP[0]):
-                self.pos[0] = self.env.grid_SP[0]
-            elif (self.pos[0] > self.env.grid_EP[0]):
-                self.pos[0] = self.env.grid_EP[0]
-            if (self.pos[1] < self.env.grid_SP[1]):
-                self.pos[1] = self.env.grid_SP[1]
-            elif (self.pos[1] > self.env.grid_EP[1]):
-                self.pos[1] = self.env.grid_EP[1]
-            
-            # Check Vaildity (Obstacle)
-            for obstacle in self.env.vec_obstacles:
-                left = obstacle[0]-self.env.grid_size//2
-                top = obstacle[1]-self.env.grid_size//2
-                right = obstacle[0]+self.env.grid_size//2
-                bottom = obstacle[1]+self.env.grid_size//2
-                if all((self.pos[0]>left, self.pos[1]>top, self.pos[0]<right, self.pos[1]<bottom)):
-                    self.pos -= force
+            self.vec += force
             
     
     # Predator
@@ -310,7 +323,7 @@ class Env_CaC():
             self.AI = AI
             self.speed = env.speed_predator
             
-            self.pos = Vec2(pos[0],pos[1]) # 픽셀 좌표
+            self.vec = Vec2(pos[0],pos[1]) # 픽셀 좌표
             self.spr = env.spr_predator
             self.rect = self.spr.get_rect()
             
@@ -329,44 +342,25 @@ class Env_CaC():
             self.field = Vec2(0,0)
             
             # Prey Field
-            subfield = Field_Point(self.pos, env.prey.pos, K=env.prey.k_self, threshold=self.thres, scale=self.vec_scale)
+            subfield = Field_Point(self.vec, env.prey.vec, K=env.prey.k_self, threshold=self.thres, scale=self.vec_scale)
             self.field += subfield
             
             # Wall Field
-            for wall in self.env.vec_walls:
-                subfield = Field_Point(self.pos, wall, K=self.k_wall, threshold=self.thres, scale=self.vec_scale)
+            for wall in self.env.vec_wal:
+                subfield = Field_Point(self.vec, wall, K=self.k_wall, threshold=self.thres, scale=self.vec_scale)
                 self.field += subfield
             
             # Obstacle Field
-            for obstacle in self.env.vec_obstacles:
-                subfield = Field_Point(self.pos, obstacle, K=self.k_obstacle, threshold=self.thres, scale=self.vec_scale)
+            for obstacle in self.env.vec_otl:
+                subfield = Field_Point(self.vec, obstacle, K=self.k_obstacle, threshold=self.thres, scale=self.vec_scale)
                 self.field += subfield
             
             # Move by Field
             force = self.field.unit()*self.speed
-            self.pos += force
-            
-            # Check Vaildity (Wall)
-            if (self.pos[0] < self.env.grid_SP[0]):
-                self.pos[0] = self.env.grid_SP[0]
-            elif (self.pos[0] > self.env.grid_EP[0]):
-                self.pos[0] = self.env.grid_EP[0]
-            if (self.pos[1] < self.env.grid_SP[1]):
-                self.pos[1] = self.env.grid_SP[1]
-            elif (self.pos[1] > self.env.grid_EP[1]):
-                self.pos[1] = self.env.grid_EP[1]
-            
-            # Check Vaildity (Obstacle)
-            for obstacle in self.env.vec_obstacles:
-                left = obstacle[0]-self.env.grid_size//2
-                top = obstacle[1]-self.env.grid_size//2
-                right = obstacle[0]+self.env.grid_size//2
-                bottom = obstacle[1]+self.env.grid_size//2
-                if all((self.pos[0]>left, self.pos[1]>top, self.pos[0]<right, self.pos[1]<bottom)):
-                    self.pos -= force
+            self.vec += force
 
 
-def Field_Point(vec_ref, vec_point, K=1, threshold=10, scale=0.01):
+def Field_Point(vec_ref, vec_point, K=1, threshold=10, scale=0.1):
     vec_ref *= scale
     vec_point *= scale
     field = (vec_ref-vec_point).unit()/(abs(vec_ref-vec_point)**2)*K
@@ -376,7 +370,7 @@ def Field_Point(vec_ref, vec_point, K=1, threshold=10, scale=0.01):
     return field
 
 
-def Field_Point_Scalar(pos_ref, pos_point, K=1, threshold=100, scale=0.1):
+def Field_Point_Scalar(pos_ref, pos_point, K=1, threshold=10, scale=0.1):
     scalar = K/((scale**2)*((pos_ref[0]-pos_point[0])**2+(pos_ref[1]-pos_point[1])**2))
     if scalar > threshold:
         scalar = threshold
@@ -460,6 +454,12 @@ while True:
                     env.step(1)
                 elif event.button == 3: # 오른쪽 클릭
                     env.step(2)
+                elif event.button == 2: # 휠 클릭
+                    env.step(3)
+                elif event.button == 4: # 휠 업
+                    env.mode_build += 1
+                elif event.button == 5: # 휠 다운
+                    env.mode_build -= 1
         elif (env.mode != 0): # play
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_RIGHT:

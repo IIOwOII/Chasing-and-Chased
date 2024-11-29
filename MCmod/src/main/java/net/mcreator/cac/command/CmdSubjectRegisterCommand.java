@@ -20,7 +20,7 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 public class CmdSubjectRegisterCommand {
 	@SubscribeEvent
 	public static void registerCommand(RegisterCommandsEvent event) {
-		event.getDispatcher().register(Commands.literal("CaC_Subject_Register")
+		event.getDispatcher().register(Commands.literal("cac_subject_register")
 
 				.then(Commands.argument("Subject", StringArgumentType.word()).executes(arguments -> {
 					Level world = arguments.getSource().getUnsidedLevel();

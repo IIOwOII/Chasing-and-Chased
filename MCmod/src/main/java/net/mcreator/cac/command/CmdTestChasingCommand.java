@@ -18,7 +18,7 @@ import net.mcreator.cac.procedures.PrdTestChasingProcedure;
 public class CmdTestChasingCommand {
 	@SubscribeEvent
 	public static void registerCommand(RegisterCommandsEvent event) {
-		event.getDispatcher().register(Commands.literal("CaC_Test_Chasing")
+		event.getDispatcher().register(Commands.literal("cac_test_chasing")
 
 				.executes(arguments -> {
 					Level world = arguments.getSource().getUnsidedLevel();

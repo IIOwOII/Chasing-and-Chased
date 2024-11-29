@@ -15,7 +15,7 @@ import net.mcreator.cac.procedures.EffOffMorphProcedure;
 
 public class EffMorphPredatorMobEffect extends MobEffect {
 	public EffMorphPredatorMobEffect() {
-		super(MobEffectCategory.BENEFICIAL, -1);
+		super(MobEffectCategory.NEUTRAL, -1);
 	}
 
 	@Override

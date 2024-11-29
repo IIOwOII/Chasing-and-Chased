@@ -1,102 +1,86 @@
-[15:46:26] [ServerMain/INFO]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
-[15:46:28] [ServerMain/INFO]: Loaded 7 recipes
-[15:46:29] [Server thread/INFO]: Starting minecraft server version 1.19.4
-[15:46:29] [Server thread/INFO]: Loading properties
-[15:46:29] [Server thread/INFO]: This server is running Paper version git-Paper-550 (MC: 1.19.4) (Implementing API version 1.19.4-R0.1-SNAPSHOT) (Git: 483368e on ver/1.19.4)
-[15:46:29] [Server thread/INFO]: Server Ping Player Sample Count: 12
-[15:46:29] [Server thread/INFO]: Using 4 threads for Netty based IO
-[15:46:29] [Server thread/WARN]: [!] The timings profiler has been enabled but has been scheduled for removal from Paper in the future.
+[15:23:09] [ServerMain/INFO]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[15:23:09] [ServerMain/WARN]: Missing data pack mod:cac
+[15:23:09] [ServerMain/WARN]: Missing data pack mod:forge
+[15:23:10] [ServerMain/INFO]: Loaded 7 recipes
+[15:23:11] [Server thread/INFO]: Starting minecraft server version 1.20.1
+[15:23:11] [Server thread/INFO]: Loading properties
+[15:23:11] [Server thread/INFO]: This server is running Paper version git-Paper-196 (MC: 1.20.1) (Implementing API version 1.20.1-R0.1-SNAPSHOT) (Git: 773dd72)
+[15:23:12] [Server thread/INFO]: Server Ping Player Sample Count: 12
+[15:23:12] [Server thread/INFO]: Using 4 threads for Netty based IO
+[15:23:12] [Server thread/WARN]: [!] The timings profiler has been enabled but has been scheduled for removal from Paper in the future.
     We recommend installing the spark profiler as a replacement: https://spark.lucko.me/
     For more information please visit: https://github.com/PaperMC/Paper/issues/8948
-[15:46:29] [Server thread/INFO]: [ChunkTaskScheduler] Chunk system is using 1 I/O threads, 4 worker threads, and gen parallelism of 4 threads
-[15:46:30] [Server thread/INFO]: Default game type: SURVIVAL
-[15:46:30] [Server thread/INFO]: Generating keypair
-[15:46:30] [Server thread/INFO]: Starting Minecraft server on *:25565
-[15:46:30] [Server thread/INFO]: Using epoll channel type
-[15:46:30] [Server thread/INFO]: Paper: Using libdeflate (Linux x86_64) compression from Velocity.
-[15:46:30] [Server thread/INFO]: Paper: Using OpenSSL 1.1.x (Linux x86_64) cipher from Velocity.
-[15:46:30] [Server thread/INFO]: [WorldEdit] Loading server plugin WorldEdit v7.2.20+6667-f0f1e66
-[15:46:31] [Server thread/INFO]: Got request to register class com.sk89q.worldedit.bukkit.BukkitServerInterface with WorldEdit [com.sk89q.worldedit.extension.platform.PlatformManager@39749095]
-[15:46:31] [Server thread/INFO]: [WorldGuard] Loading server plugin WorldGuard v7.0.8+33cdb4a
-[15:46:31] [Server thread/INFO]: Server permissions file permissions.yml is empty, ignoring it
-[15:46:31] [Server thread/INFO]: [WorldEdit] Enabling WorldEdit v7.2.20+6667-f0f1e66
-[15:46:31] [Server thread/INFO]: Registering commands with com.sk89q.worldedit.bukkit.BukkitServerInterface
-[15:46:31] [Server thread/INFO]: WEPIF: Using the Bukkit Permissions API.
-[15:46:31] [Server thread/INFO]: Using com.sk89q.worldedit.bukkit.adapter.impl.v1_19_R3.PaperweightAdapter as the Bukkit adapter
-[15:46:32] [Server thread/INFO]: Preparing level "world"
-[15:46:33] [Server thread/INFO]: Preparing start region for dimension minecraft:overworld
-[15:46:33] [Server thread/INFO]: Time elapsed: 174 ms
-[15:46:33] [Server thread/INFO]: Preparing start region for dimension minecraft:the_nether
-[15:46:33] [Server thread/INFO]: Time elapsed: 69 ms
-[15:46:33] [Server thread/INFO]: Preparing start region for dimension minecraft:the_end
-[15:46:33] [Server thread/INFO]: Time elapsed: 47 ms
-[15:46:33] [Server thread/INFO]: [WorldGuard] Enabling WorldGuard v7.0.8+33cdb4a
-[15:46:34] [Server thread/INFO]: [WorldGuard] (world) TNT ignition is PERMITTED.
-[15:46:34] [Server thread/INFO]: [WorldGuard] (world) Lighters are PERMITTED.
-[15:46:34] [Server thread/INFO]: [WorldGuard] (world) Lava fire is PERMITTED.
-[15:46:34] [Server thread/INFO]: [WorldGuard] (world) Fire spread is UNRESTRICTED.
-[15:46:34] [Server thread/INFO]: [WorldGuard] Loaded configuration for world 'world'
-[15:46:34] [Server thread/INFO]: [WorldGuard] (world_nether) TNT ignition is PERMITTED.
-[15:46:34] [Server thread/INFO]: [WorldGuard] (world_nether) Lighters are PERMITTED.
-[15:46:34] [Server thread/INFO]: [WorldGuard] (world_nether) Lava fire is PERMITTED.
-[15:46:34] [Server thread/INFO]: [WorldGuard] (world_nether) Fire spread is UNRESTRICTED.
-[15:46:34] [Server thread/INFO]: [WorldGuard] Loaded configuration for world 'world_nether'
-[15:46:34] [Server thread/INFO]: [WorldGuard] (world_the_end) TNT ignition is PERMITTED.
-[15:46:34] [Server thread/INFO]: [WorldGuard] (world_the_end) Lighters are PERMITTED.
-[15:46:34] [Server thread/INFO]: [WorldGuard] (world_the_end) Lava fire is PERMITTED.
-[15:46:34] [Server thread/INFO]: [WorldGuard] (world_the_end) Fire spread is UNRESTRICTED.
-[15:46:34] [Server thread/INFO]: [WorldGuard] Loaded configuration for world 'world_the_end'
-[15:46:34] [Server thread/INFO]: [WorldGuard] Loading region data...
-[15:46:35] [Server thread/INFO]: Starting remote control listener
-[15:46:35] [Server thread/WARN]: No rcon password set in server.properties, rcon disabled!
-[15:46:35] [Server thread/INFO]: Running delayed init tasks
-[15:46:35] [Server thread/INFO]: Done (5.751s)! For help, type "help"
-[15:46:35] [Server thread/INFO]: Timings Reset
-[15:46:41] [User Authenticator #0/INFO]: UUID of player StarNote is cd410954-44ae-4603-a765-72a8d7c04e8a
-[15:46:41] [Server thread/INFO]: StarNote joined the game
-[15:46:41] [Server thread/INFO]: StarNote[/10.201.185.86:33240] logged in with entity id 49 at ([world]2.84862296348554, 64.0, -54.08972198032016)
-[15:51:45] [Server thread/INFO]: StarNote issued server command: //cut
-[15:53:38] [Server thread/INFO]: StarNote issued server command: /gamerule doMobSpawning false
-[15:53:38] [Server thread/INFO]: [StarNote: Gamerule doMobSpawning is now set to: false]
-[15:53:57] [Server thread/INFO]: StarNote issued server command: /gamerule mobGriefing false
-[15:53:57] [Server thread/INFO]: [StarNote: Gamerule mobGriefing is now set to: false]
-[15:54:14] [Server thread/INFO]: StarNote issued server command: /gamerule doMobLoot false
-[15:54:14] [Server thread/INFO]: [StarNote: Gamerule doMobLoot is now set to: false]
-[15:54:28] [Server thread/INFO]: StarNote issued server command: /gamerule doEntityDrops false
-[15:54:28] [Server thread/INFO]: [StarNote: Gamerule doEntityDrops is now set to: false]
-[15:54:44] [Server thread/INFO]: StarNote issued server command: /gamerule doTileDrops false
-[15:54:44] [Server thread/INFO]: [StarNote: Gamerule doTileDrops is now set to: false]
-[15:54:59] [Server thread/INFO]: StarNote issued server command: /gamerule doWeatherCycle false
-[15:54:59] [Server thread/INFO]: [StarNote: Gamerule doWeatherCycle is now set to: false]
-[15:56:32] [Server thread/INFO]: StarNote lost connection: Disconnected
-[15:56:32] [Server thread/INFO]: StarNote left the game
-[15:56:36] [Server thread/INFO]: Stopping the server
-[15:56:36] [Server thread/INFO]: Stopping server
-[15:56:36] [Server thread/INFO]: [WorldGuard] Disabling WorldGuard v7.0.8+33cdb4a
-[15:56:36] [Server thread/INFO]: [WorldGuard] Shutting down executor and cancelling any pending tasks...
-[15:56:36] [Server thread/INFO]: [WorldEdit] Disabling WorldEdit v7.2.20+6667-f0f1e66
-[15:56:36] [Server thread/INFO]: Unregistering com.sk89q.worldedit.bukkit.BukkitServerInterface from WorldEdit
-[15:56:36] [Server thread/INFO]: Saving players
-[15:56:37] [Server thread/INFO]: Saving worlds
-[15:56:37] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
-[15:56:37] [Server thread/INFO]: [ChunkHolderManager] Waiting 60s for chunk system to halt for world 'world'
-[15:56:37] [Server thread/INFO]: [ChunkHolderManager] Halted chunk system for world 'world'
-[15:56:37] [Server thread/INFO]: [ChunkHolderManager] Saving all chunkholders for world 'world'
-[15:56:37] [Server thread/INFO]: [ChunkHolderManager] Saved 82 block chunks, 42 entity chunks, 0 poi chunks in world 'world' in 0.16s
-[15:56:37] [Server thread/INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
-[15:56:37] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world_nether]'/minecraft:the_nether
-[15:56:37] [Server thread/INFO]: [ChunkHolderManager] Waiting 60s for chunk system to halt for world 'world_nether'
-[15:56:37] [Server thread/INFO]: [ChunkHolderManager] Halted chunk system for world 'world_nether'
-[15:56:37] [Server thread/INFO]: [ChunkHolderManager] Saving all chunkholders for world 'world_nether'
-[15:56:37] [Server thread/INFO]: [ChunkHolderManager] Saved 0 block chunks, 11 entity chunks, 0 poi chunks in world 'world_nether' in 0.01s
-[15:56:37] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
-[15:56:37] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world_the_end]'/minecraft:the_end
-[15:56:37] [Server thread/INFO]: [ChunkHolderManager] Waiting 60s for chunk system to halt for world 'world_the_end'
-[15:56:37] [Server thread/INFO]: [ChunkHolderManager] Halted chunk system for world 'world_the_end'
-[15:56:37] [Server thread/INFO]: [ChunkHolderManager] Saving all chunkholders for world 'world_the_end'
-[15:56:37] [Server thread/INFO]: [ChunkHolderManager] Saved 10 block chunks, 10 entity chunks, 0 poi chunks in world 'world_the_end' in 0.02s
-[15:56:37] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
-[15:56:37] [Server thread/INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
-[15:56:37] [Server thread/INFO]: Flushing Chunk IO
-[15:56:37] [Server thread/INFO]: Closing Thread Pool
-[15:56:37] [Server thread/INFO]: Closing Server
+[15:23:12] [Server thread/INFO]: [ChunkTaskScheduler] Chunk system is using 1 I/O threads, 4 worker threads, and gen parallelism of 4 threads
+[15:23:12] [Server thread/INFO]: Default game type: ADVENTURE
+[15:23:12] [Server thread/INFO]: Generating keypair
+[15:23:12] [Server thread/INFO]: Starting Minecraft server on *:25565
+[15:23:12] [Server thread/INFO]: Using epoll channel type
+[15:23:12] [Server thread/INFO]: Paper: Using libdeflate (Linux x86_64) compression from Velocity.
+[15:23:12] [Server thread/INFO]: Paper: Using OpenSSL 1.1.x (Linux x86_64) cipher from Velocity.
+[15:23:13] [Server thread/ERROR]: [ModernPluginLoadingStrategy] Could not load plugin 'worldedit-bukkit-7.3.1.jar' in folder 'plugins'
+org.bukkit.plugin.InvalidPluginException: java.lang.UnsupportedClassVersionError: com/sk89q/worldedit/bukkit/WorldEditPlugin has been compiled by a more recent version of the Java Runtime (class file version 65.0), this version of the Java Runtime only recognizes class file versions up to 61.0
+	at io.papermc.paper.plugin.provider.type.spigot.SpigotPluginProvider.createInstance(SpigotPluginProvider.java:127) ~[paper-1.20.1.jar:git-Paper-196]
+	at io.papermc.paper.plugin.provider.type.spigot.SpigotPluginProvider.createInstance(SpigotPluginProvider.java:35) ~[paper-1.20.1.jar:git-Paper-196]
+	at io.papermc.paper.plugin.entrypoint.strategy.modern.ModernPluginLoadingStrategy.loadProviders(ModernPluginLoadingStrategy.java:116) ~[paper-1.20.1.jar:git-Paper-196]
+	at io.papermc.paper.plugin.storage.SimpleProviderStorage.enter(SimpleProviderStorage.java:39) ~[paper-1.20.1.jar:git-Paper-196]
+	at io.papermc.paper.plugin.entrypoint.LaunchEntryPointHandler.enter(LaunchEntryPointHandler.java:36) ~[paper-1.20.1.jar:git-Paper-196]
+	at org.bukkit.craftbukkit.v1_20_R1.CraftServer.loadPlugins(CraftServer.java:510) ~[paper-1.20.1.jar:git-Paper-196]
+	at net.minecraft.server.dedicated.DedicatedServer.initServer(DedicatedServer.java:273) ~[paper-1.20.1.jar:git-Paper-196]
+	at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1100) ~[paper-1.20.1.jar:git-Paper-196]
+	at net.minecraft.server.MinecraftServer.lambda$spin$0(MinecraftServer.java:317) ~[paper-1.20.1.jar:git-Paper-196]
+	at java.lang.Thread.run(Thread.java:840) ~[?:?]
+Caused by: java.lang.UnsupportedClassVersionError: com/sk89q/worldedit/bukkit/WorldEditPlugin has been compiled by a more recent version of the Java Runtime (class file version 65.0), this version of the Java Runtime only recognizes class file versions up to 61.0
+	at java.lang.ClassLoader.defineClass1(Native Method) ~[?:?]
+	at java.lang.ClassLoader.defineClass(ClassLoader.java:1017) ~[?:?]
+	at java.security.SecureClassLoader.defineClass(SecureClassLoader.java:150) ~[?:?]
+	at org.bukkit.plugin.java.PluginClassLoader.findClass(PluginClassLoader.java:229) ~[paper-api-1.20.1-R0.1-SNAPSHOT.jar:?]
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:592) ~[?:?]
+	at org.bukkit.plugin.java.PluginClassLoader.loadClass0(PluginClassLoader.java:155) ~[paper-api-1.20.1-R0.1-SNAPSHOT.jar:?]
+	at org.bukkit.plugin.java.PluginClassLoader.loadClass(PluginClassLoader.java:150) ~[paper-api-1.20.1-R0.1-SNAPSHOT.jar:?]
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:525) ~[?:?]
+	at java.lang.Class.forName0(Native Method) ~[?:?]
+	at java.lang.Class.forName(Class.java:467) ~[?:?]
+	at org.bukkit.plugin.java.PluginClassLoader.<init>(PluginClassLoader.java:76) ~[paper-api-1.20.1-R0.1-SNAPSHOT.jar:?]
+	at io.papermc.paper.plugin.provider.type.spigot.SpigotPluginProvider.createInstance(SpigotPluginProvider.java:123) ~[paper-1.20.1.jar:git-Paper-196]
+	... 9 more
+[15:23:13] [Server thread/INFO]: Server permissions file permissions.yml is empty, ignoring it
+[15:23:13] [Server thread/INFO]: Preparing level "world"
+[15:23:13] [Server thread/INFO]: Preparing start region for dimension minecraft:overworld
+[15:23:13] [Server thread/INFO]: Time elapsed: 284 ms
+[15:23:13] [Server thread/INFO]: Preparing start region for dimension minecraft:the_end
+[15:23:13] [Server thread/INFO]: Time elapsed: 69 ms
+[15:23:13] [Server thread/INFO]: Running delayed init tasks
+[15:23:13] [Server thread/INFO]: Done (2.286s)! For help, type "help"
+[15:23:13] [Server thread/INFO]: Timings Reset
+[15:23:21] [User Authenticator #0/INFO]: UUID of player StarNote is cd410954-44ae-4603-a765-72a8d7c04e8a
+[15:23:22] [Server thread/INFO]: StarNote joined the game
+[15:23:22] [Server thread/INFO]: StarNote[/10.201.185.86:37364] logged in with entity id 43 at ([world]0.09600709673956323, 64.0, -50.71984889467125)
+[15:24:03] [Server thread/INFO]: Made StarNote a server operator
+[15:25:25] [Server thread/INFO]: StarNote issued server command: /kill @a[type=!minecraft:player]
+[15:25:29] [Server thread/INFO]: StarNote issued server command: /kill @e[type=!minecraft:player]
+[15:25:29] [Server thread/INFO]: [StarNote: Killed 46 entities]
+[15:26:48] [Server thread/INFO]: StarNote issued server command: /br sp
+[15:26:51] [Server thread/INFO]: StarNote issued server command: //cut
+[15:26:52] [Server thread/INFO]: StarNote issued server command: /cut
+[15:26:57] [Server thread/INFO]: StarNote lost connection: Disconnected
+[15:26:57] [Server thread/INFO]: StarNote left the game
+[15:27:01] [Server thread/INFO]: Stopping the server
+[15:27:01] [Server thread/INFO]: Stopping server
+[15:27:01] [Server thread/INFO]: Saving players
+[15:27:01] [Server thread/INFO]: Saving worlds
+[15:27:01] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[15:27:01] [Server thread/INFO]: [ChunkHolderManager] Waiting 60s for chunk system to halt for world 'world'
+[15:27:01] [Server thread/INFO]: [ChunkHolderManager] Halted chunk system for world 'world'
+[15:27:01] [Server thread/INFO]: [ChunkHolderManager] Saving all chunkholders for world 'world'
+[15:27:03] [Server thread/INFO]: [ChunkHolderManager] Saved 930 block chunks, 930 entity chunks, 0 poi chunks in world 'world' in 1.65s
+[15:27:03] [Server thread/INFO]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[15:27:03] [Server thread/INFO]: Saving chunks for level 'ServerLevel[world_the_end]'/minecraft:the_end
+[15:27:03] [Server thread/INFO]: [ChunkHolderManager] Waiting 60s for chunk system to halt for world 'world_the_end'
+[15:27:03] [Server thread/INFO]: [ChunkHolderManager] Halted chunk system for world 'world_the_end'
+[15:27:03] [Server thread/INFO]: [ChunkHolderManager] Saving all chunkholders for world 'world_the_end'
+[15:27:03] [Server thread/INFO]: [ChunkHolderManager] Saved 529 block chunks, 529 entity chunks, 0 poi chunks in world 'world_the_end' in 0.17s
+[15:27:03] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[15:27:03] [Server thread/INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
+[15:27:03] [Server thread/INFO]: Flushing Chunk IO
+[15:27:03] [Server thread/INFO]: Closing Thread Pool
+[15:27:03] [Server thread/INFO]: Closing Server

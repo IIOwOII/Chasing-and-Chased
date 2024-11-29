@@ -18,7 +18,7 @@ import net.mcreator.cac.procedures.PrdSubjectCheckProcedure;
 public class CmdSubjectCheckCommand {
 	@SubscribeEvent
 	public static void registerCommand(RegisterCommandsEvent event) {
-		event.getDispatcher().register(Commands.literal("CaC_Subject_Check")
+		event.getDispatcher().register(Commands.literal("cac_subject_check")
 
 				.executes(arguments -> {
 					Level world = arguments.getSource().getUnsidedLevel();

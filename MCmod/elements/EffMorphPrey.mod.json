@@ -9,7 +9,7 @@
       "falpha": 0.0
     },
     "isInstant": false,
-    "mobEffectCategory": "HARMFUL",
+    "mobEffectCategory": "NEUTRAL",
     "renderStatusInInventory": true,
     "renderStatusInHUD": false,
     "onStarted": {
