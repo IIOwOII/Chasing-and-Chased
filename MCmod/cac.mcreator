@@ -1035,19 +1035,6 @@
       "path": "~/CacBlock"
     },
     {
-      "name": "OvlRest",
-      "type": "overlay",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "ovl_rest",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/cac/client/screens/OvlRestOverlay.java"
-        ]
-      },
-      "path": "~/CacOverlay"
-    },
-    {
       "name": "PrdStageRest",
       "type": "procedure",
       "compiles": true,
@@ -1373,6 +1360,25 @@
         ]
       },
       "path": "~/CacUpdate"
+    },
+    {
+      "name": "TaskPresessionReturn",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "task_presession_return",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/TaskPresessionReturnProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      },
+      "path": "~/CacTask/Presession"
     }
   ],
   "variable_elements": [

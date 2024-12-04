@@ -44,12 +44,12 @@ public class UdtTimerProcedure {
 								.performPrefixedCommand(
 										new CommandSourceStack(CommandSource.NULL, _ent.position(), _ent.getRotationVector(), _ent.level() instanceof ServerLevel ? (ServerLevel) _ent.level() : null, 4, _ent.getName().getString(),
 												_ent.getDisplayName(), _ent.level().getServer(), _ent),
-										("title " + "@a " + "subtitle " + "\"" + new java.text.DecimalFormat("##").format(Math.ceil(CacModVariables.MapVariables.get(world).Timer_time)) + "\""));
+										("title " + "@a " + "subtitle " + "\"" + new java.text.DecimalFormat("##").format(Math.abs(Math.ceil(CacModVariables.MapVariables.get(world).Timer_time))) + "\""));
 					}
 				}
-			} else if ((CacModVariables.MapVariables.get(world).Timer_show).equals("bar")) {
+			} else if ((CacModVariables.MapVariables.get(world).Timer_show).equals("actionbar")) {
 				if (entity instanceof Player _player && !_player.level().isClientSide())
-					_player.displayClientMessage(Component.literal((new java.text.DecimalFormat("##").format(Math.ceil(CacModVariables.MapVariables.get(world).Timer_time)))), true);
+					_player.displayClientMessage(Component.literal((new java.text.DecimalFormat("##").format(Math.abs(Math.ceil(CacModVariables.MapVariables.get(world).Timer_time))))), true);
 			}
 		} else {
 			CacModVariables.MapVariables.get(world).Timer_time = 0;

@@ -2,18 +2,25 @@ package net.mcreator.cac.procedures;
 
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.GameType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.CommandSource;
 
 import net.mcreator.cac.network.CacModVariables;
+import net.mcreator.cac.init.CacModMobEffects;
 
 public class TaskPresessionShowmapProcedure {
 	public static void execute(LevelAccessor world, Entity entity) {
 		if (entity == null)
 			return;
+		CacModVariables.MapVariables.get(world).Switch_Task = false;
+		CacModVariables.MapVariables.get(world).syncData(world);
+		if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
+			_entity.addEffect(new MobEffectInstance(CacModMobEffects.EFF_STOP_MOVE.get(), 72000, 0, false, false));
 		if (entity instanceof ServerPlayer _player)
 			_player.setGameMode(GameType.SPECTATOR);
 		{
@@ -25,7 +32,7 @@ public class TaskPresessionShowmapProcedure {
 		}
 		CacModVariables.MapVariables.get(world).Timer_time = 5;
 		CacModVariables.MapVariables.get(world).syncData(world);
-		CacModVariables.MapVariables.get(world).Timer_show = "bar";
+		CacModVariables.MapVariables.get(world).Timer_show = "actionbar";
 		CacModVariables.MapVariables.get(world).syncData(world);
 		CacModVariables.MapVariables.get(world).Timer_event = "pre_return";
 		CacModVariables.MapVariables.get(world).syncData(world);

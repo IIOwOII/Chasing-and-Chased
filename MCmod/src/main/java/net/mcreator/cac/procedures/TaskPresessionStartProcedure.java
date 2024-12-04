@@ -17,6 +17,8 @@ public class TaskPresessionStartProcedure {
 		if (entity == null)
 			return;
 		if ((StringArgumentType.getString(arguments, "method")).equals("AP") || (StringArgumentType.getString(arguments, "method")).equals("AD")) {
+			CacModVariables.MapVariables.get(world).Switch_Task = false;
+			CacModVariables.MapVariables.get(world).syncData(world);
 			{
 				Entity _ent = entity;
 				if (!_ent.level().isClientSide() && _ent.getServer() != null) {
@@ -24,7 +26,7 @@ public class TaskPresessionStartProcedure {
 							_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), ("title " + "@a " + "title " + "\"\uC7A0\uC2DC \uD6C4 \uC5F0\uC2B5 \uACFC\uC81C\uB97C \uC2DC\uC791\uD569\uB2C8\uB2E4.\""));
 				}
 			}
-			CacModVariables.MapVariables.get(world).Timer_time = 10;
+			CacModVariables.MapVariables.get(world).Timer_time = 5;
 			CacModVariables.MapVariables.get(world).syncData(world);
 			CacModVariables.MapVariables.get(world).Timer_show = "subtitle";
 			CacModVariables.MapVariables.get(world).syncData(world);
