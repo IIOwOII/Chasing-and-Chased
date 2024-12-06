@@ -5,6 +5,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.network.chat.Component;
+import net.minecraft.client.Minecraft;
 
 import net.mcreator.cac.network.CacModVariables;
 
@@ -19,5 +20,7 @@ public class PrdTestOffProcedure {
 			_entity.removeAllEffects();
 		if (entity instanceof Player _player && !_player.level().isClientSide())
 			_player.displayClientMessage(Component.literal("Test Off"), false);
+		if (!world.isClientSide() && world.getServer() != null)
+			world.getServer().getPlayerList().broadcastSystemMessage(Component.literal((new java.text.DecimalFormat("##.##").format(Minecraft.getInstance().options.fov().get()))), false);
 	}
 }

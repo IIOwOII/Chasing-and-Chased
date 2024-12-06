@@ -1,9 +1,7 @@
 package net.mcreator.cac.procedures;
 
-import net.minecraft.world.level.GameType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.CommandSource;
@@ -21,8 +19,6 @@ public class TaskPresessionReturnProcedure {
 						_ent.getName().getString(), _ent.getDisplayName(), _ent.level().getServer(), _ent), "cac_tp task");
 			}
 		}
-		if (entity instanceof ServerPlayer _player)
-			_player.setGameMode(GameType.ADVENTURE);
 		if (entity instanceof LivingEntity _entity)
 			_entity.removeEffect(CacModMobEffects.EFF_STOP_MOVE.get());
 	}

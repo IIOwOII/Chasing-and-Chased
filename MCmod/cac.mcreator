@@ -537,44 +537,6 @@
       "path": "~/CacCommand"
     },
     {
-      "name": "EffTickMorph",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "eff_tick_morph",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/cac/procedures/EffTickMorphProcedure.java"
-        ],
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ]
-      },
-      "path": "~/CacEffect"
-    },
-    {
-      "name": "EffOffMorph",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "eff_off_morph",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/cac/procedures/EffOffMorphProcedure.java"
-        ],
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ]
-      },
-      "path": "~/CacEffect"
-    },
-    {
       "name": "EffOnMorphPredator",
       "type": "procedure",
       "compiles": true,
@@ -1277,7 +1239,7 @@
       "name": "EffOnStopMove",
       "type": "procedure",
       "compiles": true,
-      "locked_code": true,
+      "locked_code": false,
       "registry_name": "eff_on_stop_move",
       "metadata": {
         "files": [
@@ -1296,7 +1258,7 @@
       "name": "EffOffStopMove",
       "type": "procedure",
       "compiles": true,
-      "locked_code": true,
+      "locked_code": false,
       "registry_name": "eff_off_stop_move",
       "metadata": {
         "files": [
@@ -1375,6 +1337,80 @@
           {
             "name": "entity",
             "type": "entity"
+          }
+        ]
+      },
+      "path": "~/CacTask/Presession"
+    },
+    {
+      "name": "CmdExperimental",
+      "type": "command",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "cmd_experimental",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/command/CmdExperimentalCommand.java"
+        ]
+      },
+      "path": "~/CacCommand"
+    },
+    {
+      "name": "PrdExperimental",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "prd_experimental",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/PrdExperimentalProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/CacCommand"
+    },
+    {
+      "name": "TaskDefaultSetting",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "task_default_setting",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/TaskDefaultSettingProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/CacTask/General"
+    },
+    {
+      "name": "TaskPresessionSetting",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "task_presession_setting",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/TaskPresessionSettingProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "world",
+            "type": "world"
           }
         ]
       },
@@ -1465,6 +1501,66 @@
       "type": "string",
       "scope": "map",
       "value": "\"none\""
+    },
+    {
+      "name": "Pmt_unittime",
+      "type": "number",
+      "scope": "map",
+      "value": "30.0"
+    },
+    {
+      "name": "Exp_prechasing_time",
+      "type": "datalist",
+      "scope": "map",
+      "value": "new ListTag()"
+    },
+    {
+      "name": "Exp_prechasing_win",
+      "type": "datalist",
+      "scope": "map",
+      "value": "new ListTag()"
+    },
+    {
+      "name": "Exp_prechasing_difficulty",
+      "type": "datalist",
+      "scope": "map",
+      "value": "new ListTag()"
+    },
+    {
+      "name": "Exp_prechasing_trial",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "Exp_prechased_time",
+      "type": "datalist",
+      "scope": "map",
+      "value": "new ListTag()"
+    },
+    {
+      "name": "Exp_prechased_win",
+      "type": "datalist",
+      "scope": "map",
+      "value": "new ListTag()"
+    },
+    {
+      "name": "Exp_prechased_difficulty",
+      "type": "datalist",
+      "scope": "map",
+      "value": "new ListTag()"
+    },
+    {
+      "name": "Exp_prechased_trial",
+      "type": "number",
+      "scope": "map",
+      "value": "0"
+    },
+    {
+      "name": "Exp_pre_type",
+      "type": "datalist",
+      "scope": "map",
+      "value": "new ListTag()"
     }
   ],
   "sound_elements": [],
@@ -1543,6 +1639,10 @@
         "children": [
           {
             "name": "Presession",
+            "children": []
+          },
+          {
+            "name": "General",
             "children": []
           }
         ]

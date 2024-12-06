@@ -14,6 +14,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.CompoundTag;
 
 import net.mcreator.cac.CacMod;
@@ -101,6 +102,16 @@ public class CacModVariables {
 		public double Timer_time = 0.0;
 		public String Timer_event = "\"none\"";
 		public String Timer_show = "\"none\"";
+		public double Pmt_unittime = 30.0;
+		public ListTag Exp_prechasing_time = new ListTag();
+		public ListTag Exp_prechasing_win = new ListTag();
+		public ListTag Exp_prechasing_difficulty = new ListTag();
+		public double Exp_prechasing_trial = 0;
+		public ListTag Exp_prechased_time = new ListTag();
+		public ListTag Exp_prechased_win = new ListTag();
+		public ListTag Exp_prechased_difficulty = new ListTag();
+		public double Exp_prechased_trial = 0;
+		public ListTag Exp_pre_type = new ListTag();
 
 		public static MapVariables load(CompoundTag tag) {
 			MapVariables data = new MapVariables();
@@ -123,6 +134,16 @@ public class CacModVariables {
 			Timer_time = nbt.getDouble("Timer_time");
 			Timer_event = nbt.getString("Timer_event");
 			Timer_show = nbt.getString("Timer_show");
+			Pmt_unittime = nbt.getDouble("Pmt_unittime");
+			this.Exp_prechasing_time = nbt.get("Exp_prechasing_time") instanceof ListTag Exp_prechasing_time ? Exp_prechasing_time : new ListTag();
+			this.Exp_prechasing_win = nbt.get("Exp_prechasing_win") instanceof ListTag Exp_prechasing_win ? Exp_prechasing_win : new ListTag();
+			this.Exp_prechasing_difficulty = nbt.get("Exp_prechasing_difficulty") instanceof ListTag Exp_prechasing_difficulty ? Exp_prechasing_difficulty : new ListTag();
+			Exp_prechasing_trial = nbt.getDouble("Exp_prechasing_trial");
+			this.Exp_prechased_time = nbt.get("Exp_prechased_time") instanceof ListTag Exp_prechased_time ? Exp_prechased_time : new ListTag();
+			this.Exp_prechased_win = nbt.get("Exp_prechased_win") instanceof ListTag Exp_prechased_win ? Exp_prechased_win : new ListTag();
+			this.Exp_prechased_difficulty = nbt.get("Exp_prechased_difficulty") instanceof ListTag Exp_prechased_difficulty ? Exp_prechased_difficulty : new ListTag();
+			Exp_prechased_trial = nbt.getDouble("Exp_prechased_trial");
+			this.Exp_pre_type = nbt.get("Exp_pre_type") instanceof ListTag Exp_pre_type ? Exp_pre_type : new ListTag();
 		}
 
 		@Override
@@ -141,6 +162,16 @@ public class CacModVariables {
 			nbt.putDouble("Timer_time", Timer_time);
 			nbt.putString("Timer_event", Timer_event);
 			nbt.putString("Timer_show", Timer_show);
+			nbt.putDouble("Pmt_unittime", Pmt_unittime);
+			nbt.put("Exp_prechasing_time", this.Exp_prechasing_time);
+			nbt.put("Exp_prechasing_win", this.Exp_prechasing_win);
+			nbt.put("Exp_prechasing_difficulty", this.Exp_prechasing_difficulty);
+			nbt.putDouble("Exp_prechasing_trial", Exp_prechasing_trial);
+			nbt.put("Exp_prechased_time", this.Exp_prechased_time);
+			nbt.put("Exp_prechased_win", this.Exp_prechased_win);
+			nbt.put("Exp_prechased_difficulty", this.Exp_prechased_difficulty);
+			nbt.putDouble("Exp_prechased_trial", Exp_prechased_trial);
+			nbt.put("Exp_pre_type", this.Exp_pre_type);
 			return nbt;
 		}
 

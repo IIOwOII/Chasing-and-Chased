@@ -1283,7 +1283,12 @@
         "files": [
           "src/main/java/net/mcreator/cac/procedures/EffOnStopMoveProcedure.java"
         ],
-        "dependencies": []
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
       },
       "path": "~/CacEffect"
     },
@@ -1291,13 +1296,18 @@
       "name": "EffOffStopMove",
       "type": "procedure",
       "compiles": true,
-      "locked_code": false,
+      "locked_code": true,
       "registry_name": "eff_off_stop_move",
       "metadata": {
         "files": [
           "src/main/java/net/mcreator/cac/procedures/EffOffStopMoveProcedure.java"
         ],
-        "dependencies": []
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
       },
       "path": "~/CacEffect"
     },
@@ -1369,6 +1379,33 @@
         ]
       },
       "path": "~/CacTask/Presession"
+    },
+    {
+      "name": "CmdExperimental",
+      "type": "command",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "cmd_experimental",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/command/CmdExperimentalCommand.java"
+        ]
+      },
+      "path": "~/CacCommand"
+    },
+    {
+      "name": "PrdExperimental",
+      "type": "procedure",
+      "compiles": false,
+      "locked_code": true,
+      "registry_name": "prd_experimental",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/PrdExperimentalProcedure.java"
+        ],
+        "dependencies": []
+      },
+      "path": "~/CacCommand"
     }
   ],
   "variable_elements": [

@@ -17,8 +17,8 @@ public class TaskPresessionStartProcedure {
 		if (entity == null)
 			return;
 		if ((StringArgumentType.getString(arguments, "method")).equals("AP") || (StringArgumentType.getString(arguments, "method")).equals("AD")) {
-			CacModVariables.MapVariables.get(world).Switch_Task = false;
-			CacModVariables.MapVariables.get(world).syncData(world);
+			TaskDefaultSettingProcedure.execute(world, entity);
+			TaskPresessionSettingProcedure.execute(world);
 			{
 				Entity _ent = entity;
 				if (!_ent.level().isClientSide() && _ent.getServer() != null) {

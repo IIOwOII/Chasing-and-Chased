@@ -537,44 +537,6 @@
       "path": "~/CacCommand"
     },
     {
-      "name": "EffTickMorph",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "eff_tick_morph",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/cac/procedures/EffTickMorphProcedure.java"
-        ],
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ]
-      },
-      "path": "~/CacEffect"
-    },
-    {
-      "name": "EffOffMorph",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "eff_off_morph",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/cac/procedures/EffOffMorphProcedure.java"
-        ],
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ]
-      },
-      "path": "~/CacEffect"
-    },
-    {
       "name": "EffOnMorphPredator",
       "type": "procedure",
       "compiles": true,
@@ -1263,7 +1225,7 @@
     {
       "name": "EffStopMove",
       "type": "potioneffect",
-      "compiles": false,
+      "compiles": true,
       "locked_code": false,
       "registry_name": "eff_stop_move",
       "metadata": {
@@ -1277,13 +1239,18 @@
       "name": "EffOnStopMove",
       "type": "procedure",
       "compiles": true,
-      "locked_code": true,
+      "locked_code": false,
       "registry_name": "eff_on_stop_move",
       "metadata": {
         "files": [
           "src/main/java/net/mcreator/cac/procedures/EffOnStopMoveProcedure.java"
         ],
-        "dependencies": []
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
       },
       "path": "~/CacEffect"
     },
@@ -1297,7 +1264,12 @@
         "files": [
           "src/main/java/net/mcreator/cac/procedures/EffOffStopMoveProcedure.java"
         ],
-        "dependencies": []
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
       },
       "path": "~/CacEffect"
     },
@@ -1369,6 +1341,56 @@
         ]
       },
       "path": "~/CacTask/Presession"
+    },
+    {
+      "name": "CmdExperimental",
+      "type": "command",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "cmd_experimental",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/command/CmdExperimentalCommand.java"
+        ]
+      },
+      "path": "~/CacCommand"
+    },
+    {
+      "name": "PrdExperimental",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "prd_experimental",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/PrdExperimentalProcedure.java"
+        ],
+        "dependencies": []
+      },
+      "path": "~/CacCommand"
+    },
+    {
+      "name": "TaskDefaultSetting",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "task_default_setting",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/TaskDefaultSettingProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      },
+      "path": "~/CacTask/General"
     }
   ],
   "variable_elements": [
@@ -1533,6 +1555,10 @@
         "children": [
           {
             "name": "Presession",
+            "children": []
+          },
+          {
+            "name": "General",
             "children": []
           }
         ]

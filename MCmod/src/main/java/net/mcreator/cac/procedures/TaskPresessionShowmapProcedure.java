@@ -1,11 +1,9 @@
 package net.mcreator.cac.procedures;
 
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.GameType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.CommandSource;
@@ -17,12 +15,8 @@ public class TaskPresessionShowmapProcedure {
 	public static void execute(LevelAccessor world, Entity entity) {
 		if (entity == null)
 			return;
-		CacModVariables.MapVariables.get(world).Switch_Task = false;
-		CacModVariables.MapVariables.get(world).syncData(world);
 		if (entity instanceof LivingEntity _entity && !_entity.level().isClientSide())
 			_entity.addEffect(new MobEffectInstance(CacModMobEffects.EFF_STOP_MOVE.get(), 72000, 0, false, false));
-		if (entity instanceof ServerPlayer _player)
-			_player.setGameMode(GameType.SPECTATOR);
 		{
 			Entity _ent = entity;
 			if (!_ent.level().isClientSide() && _ent.getServer() != null) {

@@ -537,44 +537,6 @@
       "path": "~/CacCommand"
     },
     {
-      "name": "EffTickMorph",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "eff_tick_morph",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/cac/procedures/EffTickMorphProcedure.java"
-        ],
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ]
-      },
-      "path": "~/CacEffect"
-    },
-    {
-      "name": "EffOffMorph",
-      "type": "procedure",
-      "compiles": true,
-      "locked_code": false,
-      "registry_name": "eff_off_morph",
-      "metadata": {
-        "files": [
-          "src/main/java/net/mcreator/cac/procedures/EffOffMorphProcedure.java"
-        ],
-        "dependencies": [
-          {
-            "name": "entity",
-            "type": "entity"
-          }
-        ]
-      },
-      "path": "~/CacEffect"
-    },
-    {
       "name": "EffOnMorphPredator",
       "type": "procedure",
       "compiles": true,
@@ -1277,7 +1239,7 @@
       "name": "EffOnStopMove",
       "type": "procedure",
       "compiles": true,
-      "locked_code": true,
+      "locked_code": false,
       "registry_name": "eff_on_stop_move",
       "metadata": {
         "files": [
@@ -1296,7 +1258,7 @@
       "name": "EffOffStopMove",
       "type": "procedure",
       "compiles": true,
-      "locked_code": true,
+      "locked_code": false,
       "registry_name": "eff_off_stop_move",
       "metadata": {
         "files": [
@@ -1381,18 +1343,31 @@
       "path": "~/CacTask/Presession"
     },
     {
-      "name": "EffTickStopMove",
-      "type": "procedure",
+      "name": "CmdExperimental",
+      "type": "command",
       "compiles": true,
       "locked_code": false,
-      "registry_name": "eff_tick_stop_move",
+      "registry_name": "cmd_experimental",
       "metadata": {
         "files": [
-          "src/main/java/net/mcreator/cac/procedures/EffTickStopMoveProcedure.java"
+          "src/main/java/net/mcreator/cac/command/CmdExperimentalCommand.java"
+        ]
+      },
+      "path": "~/CacCommand"
+    },
+    {
+      "name": "PrdExperimental",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "prd_experimental",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/cac/procedures/PrdExperimentalProcedure.java"
         ],
         "dependencies": []
       },
-      "path": "~/CacEffect"
+      "path": "~/CacCommand"
     }
   ],
   "variable_elements": [

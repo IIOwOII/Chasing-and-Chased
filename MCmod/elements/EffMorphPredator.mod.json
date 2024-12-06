@@ -14,12 +14,6 @@
     "renderStatusInHUD": false,
     "onStarted": {
       "name": "EffOnMorphPredator"
-    },
-    "onActiveTick": {
-      "name": "EffTickMorph"
-    },
-    "onExpired": {
-      "name": "EffOffMorph"
     }
   }
 }
